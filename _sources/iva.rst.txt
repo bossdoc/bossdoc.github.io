@@ -1,0 +1,28 @@
+.. boss documentation master file, created by
+   sphinx-quickstart on Tue Oct  8 17:22:43 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. _iva:
+
+IVA
+===
+
+IVA is the intelligent voice assistant thar processes a query in free form natural language, extracts the ``intent`` and ``entities`` from it and maps the query to the relevant function that can respond to the query given the extracted entities. At it's core IVA uses a NLP understanding library ``snips-nlu`` for extracting the intent and entities from a query.
+
+Training the NLP engine
+-----------------------
+
+Creating dataset
+	Edit the files inside ``vast.views_boss_assistant/query_parsing_snips/parsing_data``. The data format should be self-explanatory, but to read more about it refer to snips-nlu documentation. 
+
+	Edit the ``create_dataset.sh`` file inside ``vast.views_boss_assistant/query_parsing_snips`` to supply the right filepath to the target dataset json file to be saved in ``Data/NLU`` folder. Run ``sh create_dataset.sh`` to save the dataset.
+Training
+	Train the model by running the following from django shell::
+
+		from vast.views_boss_assistant.query_parsing_snips import train_model
+		train_model.train_model()
+
+
+.. automodule:: vast.views_boss_assistant.ChatBot
+	:members:

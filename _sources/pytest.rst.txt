@@ -1,0 +1,91 @@
+.. _pytest:
+
+PyTest
+======
+
+Installation
+------------
+
+Install the following using pip::
+	
+	pytest==4.6.5
+	pytest-django==3.5.1
+
+Create a file ``pytest.ini`` in the BOSS directory outside vast with the following content::
+	
+	[pytest]
+	DJANGO_SETTINGS_MODULE = Virtual_Arrival.settings
+
+Docs: https://docs.pytest.org/en/latest/contents.html
+
+Configure with existing database
+--------------------------------
+
+Create a file ``conftest.py`` in the BOSS directory outside vast with the following content:
+
+.. code-block:: python
+	
+	import pytest
+	from django.conf import settings
+
+	@pytest.fixture(scope='session')
+	def django_db_setup():
+	    settings.DATABASES['default'] = {
+	        'ENGINE': 'django.db.backends.mysql',
+	        'NAME': 'vwr',
+	        'USER': 'root',
+	        'PASSWORD': 'PASSWORD',
+	        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+	        'PORT': '3306',
+	    }
+
+
+
+Running a Test
+--------------
+
+Run a single test file using the following command::
+	
+	pytest vast/views_boss_assistant/test_chatbot.py 
+
+To print the output during the execution use the ``-s`` option::
+	
+	pytest vast/views_boss_assistant/test_chatbot.py -s
+
+To test all tests in a module (all files thast start with test\_ or end with test.py (I think so! ) )::
+	
+	pytest vast/views_boss_assistant/
+
+Writing a Test
+--------------
+
+A sample test is given below. Use the dectorator ``@pytest.mark.django_db`` if your test function uses the database (which will be the case with most tests your write)
+
+.. code-block:: python
+	
+	import pytest
+	from django.core.urlresolvers import reverse 
+	from django.test import Client
+	import json
+
+	@pytest.mark.django_db
+	def test_ok_iva():
+		"""
+		Simple test for ok_iva view
+		"""
+		c = Client()
+		
+		# login
+		c.post(u'/vast/user_login', 
+			{'username': json.dumps('paarth_admin'), 
+			'password': json.dumps('Paarth22')}
+		)
+		
+		r = c.get(u'/vast/ok_iva/', 
+			{'query' : "What is the warranted consumption of Pacific Anna"}
+		)
+
+		assert r.status_code == 200
+		assert 'data' in json.loads(r.content)
+	
+

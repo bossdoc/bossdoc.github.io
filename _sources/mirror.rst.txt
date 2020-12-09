@@ -1,0 +1,58 @@
+.. _mirror:
+
+Mirror Offline HTML Form
+=================
+
+Important Classes
+--------------
+
+- num_only - This class is used to make input control accept only Positive Numbers.
+- negative_num_only - This class is for both -ve and +ve Integers. 
+- check_time - This converts the integers added into respective time like for eg.- 400 would be converted to 4:00 , It is used for time field.
+
+Important Functions
+--------------
+
+- html2json - This function takes table name and type as parameter, Here type can be anything like "submit" for eg and table name should be like ".noon_param". This function will create data as a javascript object/dictionary where key would be input fields id and its value will be as value in the object. This function helps us to generate data in a simple way where adding new form controls becomes easier.
+
+
+Adding Form Input/Form Control
+--------------
+It can be a simple input tag where the main thing is the class given to it. Like in Noon Report in Mirror Form, Form Controls are given noon_param as a class , which helps at the time of data creation. So similarly all other classes should be given which are passed in HTML2JSON function to generate data automatically using this tactic.
+
+Adding New Section, for e.g :- SOF, Bunker Requisition, etc
+--------------
+1)Go to Unordered List with class "nav_ul" there add new section and make sure to give its id +1 the previous maximum id present there, like for e.g- if max id was m12 then you should give it as m13 and similarly the showhide function should be passed the same number. This number is important. This number should be used in giving the sections's div id. Like each section has its on own id that starts with InDiv followed by their respective unique section numbers . You should give it the id you gave in the above steps.
+2)Add Id in report_track_mapping
+3)Add Id in assign_value_mapping, here for eg if your section is xyz then you should give its storage key as xyz_details and its key should be the number which we gave in step 1.
+4)Add Id in nav_dict
+
+
+
+
+Mirror Backend
+=================
+
+Read Mail management Command
+--------------
+
+-There is a management command named read_mail which automatically reads the mail and extract the encoded data and submit it into our systems.
+-There is a function named read_content_from_mail which is automatically triggered after regular intervals through this management command which submits the mirror reports into the system in these intervals.
+
+Passing Encoded Data Manually in Mirror Backend System
+--------------
+-In the read_mail.py management command file , in its class Command there is a function named handle, in that function just copy and paste your encoded data in the variable named "data" and comment line which is calling read_content_from_mail function because it is meant to read data on the mail server.
+-After commenting the line in above step, uncomment line that calls views_receive_data.save_data_from_mail(data) function, This is the main function that handles the mirror data and does the job.
+-If we are adding any module it has to start with this function
+
+Adding new Section like for e.g- Machinery Details
+--------------
+- In views_receive_data.save_data_from_mail function search for line that says "get_meta_fields" , This function returns all the table column names as an array which we will be requiring later.
+-A bit below this line there is "prepare_dict_for_noon" where we are required to pass noon_data(the whole data which we have decoded already) , meta fields generated in above step, and d_type which is a parameter that can be utilized for some unique work we require to perform in this specific funtion.
+-Add the dictionary prepared in above step in dict_model_mapping, then add key in seq_mapper
+ 
+
+
+
+
+

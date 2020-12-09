@@ -1,0 +1,6 @@
+.. _post_voyage:
+
+Post Voyage
+===========
+
+This is placeholder documentation

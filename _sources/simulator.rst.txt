@@ -1,0 +1,6 @@
+.. _simulator:
+
+Voyage Simulator
+================
+
+This is placeholder documentation

@@ -1,0 +1,6 @@
+.. _captn:
+
+Capt-N
+======
+
+This is placeholder documentation

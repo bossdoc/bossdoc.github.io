@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Writing Docs &mdash; BOSS  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PyTest" href="pytest.html" />
+    <link rel="prev" title="UI Standard" href="ui_standard.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> BOSS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui_standard.html">UI Standard</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing Docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#editing-docs">Editing Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-html-from-docs">Generating Html from docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pytest.html">PyTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulator.html">Voyage Simulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror.html">Mirror Offline HTML Form</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror.html#mirror-backend">Mirror Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_voyage.html">Post Voyage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="captn.html">Capt-N</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iva.html">IVA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo_helper.html">Geo Helper</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BOSS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Writing Docs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/writing_docs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-docs">
+<span id="id1"></span><h1>Writing Docs<a class="headerlink" href="#writing-docs" title="Permalink to this headline">¶</a></h1>
+<p>We use the sphinx to document our code.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Install the following packages using pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sphinx</span><span class="o">==</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">5</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">rtd</span><span class="o">-</span><span class="n">theme</span><span class="o">==</span><span class="mf">0.4</span><span class="o">.</span><span class="mi">3</span>
+<span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">napoleon</span><span class="o">==</span><span class="mf">0.7</span>
+<span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">websupport</span><span class="o">==</span><span class="mf">1.1</span><span class="o">.</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="editing-docs">
+<h2>Editing Docs<a class="headerlink" href="#editing-docs" title="Permalink to this headline">¶</a></h2>
+<p>The docs are written in <code class="docutils literal notranslate"><span class="pre">rst</span></code> files in <code class="docutils literal notranslate"><span class="pre">vast/docs</span></code> directory. To add a new menu item edit <code class="docutils literal notranslate"><span class="pre">index.rst</span></code>. Edit the docs, follow examples in the existing ones to see how to insert code snippets and module documentations etc. Eg. see <code class="docutils literal notranslate"><span class="pre">iva.rst</span></code> for an example.</p>
+</div>
+<div class="section" id="generating-html-from-docs">
+<h2>Generating Html from docs<a class="headerlink" href="#generating-html-from-docs" title="Permalink to this headline">¶</a></h2>
+<p>Use the following command to generate the html code for the website in <code class="docutils literal notranslate"><span class="pre">vast/docs/_build/html</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>Use the following to generate <code class="docutils literal notranslate"><span class="pre">html</span></code> code in a particular directory</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="o">.</span> <span class="o">&lt;</span><span class="n">HTML</span> <span class="n">DIR</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pytest.html" class="btn btn-neutral float-right" title="PyTest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ui_standard.html" class="btn btn-neutral float-left" title="UI Standard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Blue Water Trade Winds pvt ltd
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

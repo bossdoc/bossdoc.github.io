@@ -1,0 +1,61 @@
+.. _installation:
+
+Installation
+============
+
+Following installation guide assumes a Unix based operating system. Make sure you have Python 2.7 installed. You will also need to install MySql Client 5.6.
+
+Getting the code
+----------------
+
+* Clone the root BOSS directory containing ``manage.py``, and ``Virtual_Arrival`` directory. 
+
+	.. code-block:: bash
+
+		git clone https://github.com/paarthneekhara/BOSS_root
+
+* Download the data folder from `here <https://drive.google.com/file/d/1qQ0sm4nmN9ACK0FKd6Kaaj45to_SqHc2/view?usp=sharing>`_, unzip it and place the ``Data`` directory inside ``BOSS_root``.
+
+* Inside the ``BOSS_root`` directory clone ``vast``:
+
+	.. code-block:: bash
+
+		git clone https://github.com/paarthneekhara/vast
+
+The directory structure after these steps should look something like this:
+
+.. code-block:: text
+
+	BOSS_root/
+		|-Data/
+		│-vast/
+		|-Virtual_Arrival/
+		|-manage.py
+
+* Next you will need to edit the ``Virtual_Arrival/settings.py`` and ``conftest.py`` for configuring mysql connection parameters of your machine.
+
+Installing Dependencies
+-----------------------
+* create a Python 2.7 virtual enviroment in ``BOSS_root`` as follows. If your default python version is 2.7, the following would work, other wise specify Python 2.7 path using ``-p`` option.
+
+	.. code-block:: bash
+
+		virtualenv bossenv
+
+* Install all dependencies using
+
+	.. code-block:: bash
+
+		pip install -r requirements.txt
+
+Running the server
+------------------
+* If everything worked correctly, you should be run the server using:
+
+	.. code-block:: bash
+
+		python manage.py runserver
+
+* The following login screen should come up on accessing ``http://localhost:8000/vast/user_login``
+
+	.. image:: _static/login.png

@@ -1,0 +1,36 @@
+.. _tutorial:
+
+Tutorial
+========
+
+In this tutorial we will be going over the steps involved in full-stack development of a module in BOSS.
+
+Creating a URL
+--------------
+
+To create a module accessible to a user, we will need expose a url at which the module will be available. The file  ``Virtual_Arrival/urls.py`` controls what urls are available at the highest abstraction level. This includes urls in files ``vast/urls.py``, ``vast/_weather_routing.py`` etc. The main ``urls.py`` further defines the prefix to various urls. For example the url ``data_entry_ship`` defined ``vast/urls.py`` will be accessible at ``https://localhost:8000/vast/data_entry_ship`` because the ``Virtual_Arrival/urls.py`` includes urls from the ``vast/urls.py`` with the prefix vast. 
+
+While there is no strict rule as to which file a new url should be defined, generally speaking, modules related to simulation, weather routing etc are defined in ``vast/urls_weather_routing.py``. Data entry and visualization modules are generally defined in ``vast/urls.py``. You can go through them to get an idea about where a new url shoudl be difined. 
+
+So let's add a url for our module that shows the user, the list of their vessels and number of voyages completed till date. We will call this url ``number_of_voyages``.
+
+.. code-block:: python
+	
+	url(r'^number_of_voyages/', views.get_number_of_voyages, name = 'number_of_voyages'),
+
+In the above code we have done more than just adding a new url. We have also connected the url to a ``python function`` or more formally a ``view`` that handles the url. Since we have not defined the function yet, acccessing the url at ``https://localhost:8000/vast/data_entry_ship`` will cause an error. The function it is looking for currently is ``get_number_of_voyages`` in the file views.py which is imported in ``vast/urls.py`` somewhere at the top.
+
+Writing the view
+----------------
+
+To handle the url, let's define the function ``get_number_of_voyages`` in the file ``vast/views.py``. 
+In this section, we will first focus of fetching the relevant data that needs to be shown to the user, and then we will see how we can render it to an html template in the next section.
+
+.. code-block:: python
+	
+	def get_number_of_voyages(request):
+		if request.user.is_authenticated():
+			ships = request.user.is_authenticated():
+
+Rendering a template
+--------------------

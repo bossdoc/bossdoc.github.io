@@ -1,0 +1,6 @@
+.. _ui_standard:
+
+UI Standard
+===========
+
+UI standard for things dates, tables, fonts, colors etc.
