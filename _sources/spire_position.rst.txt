@@ -1,0 +1,14 @@
+
+.. _spire_position:
+
+Spire Position
+==============
+
+Spire Position contains all the functions related to the analysis on the received sSAT AIS feed .
+
+Functions
+----------
+
+
+.. automodule:: vast.management.commands.spire_position
+	:members:

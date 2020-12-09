@@ -20,6 +20,7 @@ Welcome to boss's documentation!
    captn
    iva
    geo_helper
+   spire_position
 
 Indices and tables
 ==================
