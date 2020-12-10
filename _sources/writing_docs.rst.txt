@@ -30,3 +30,10 @@ Use the following command to generate the html code for the website in ``vast/do
 Use the following to generate ``html`` code in a particular directory ::
 	
 	sphinx-build -b html . <HTML DIR>
+
+Writing HTML + Publishing on bossdoc.github.io
+----------------------------------------------
+
+The following script will generate the html of docs, and publish it to bossdoc.github.io ::
+	
+	python publishdocs.py
