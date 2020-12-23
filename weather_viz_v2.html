@@ -93,7 +93,11 @@
 <li class="toctree-l1"><a class="reference internal" href="iva.html">IVA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="geo_helper.html">Geo Helper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Weather Viz V2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Weather Viz V2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#front-end">Front End</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#back-end">Back End</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -160,9 +164,46 @@
             
   <div class="section" id="weather-viz-v2">
 <span id="id1"></span><h1>Weather Viz V2<a class="headerlink" href="#weather-viz-v2" title="Permalink to this headline">¶</a></h1>
-<p>Template Directory: <code class="docutils literal notranslate"><span class="pre">vast/templates/weather_vizv2</span></code>
-Views Directory: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_vizv2/</span></code></p>
-<span class="target" id="module-vast.views_weather_vizv2"></span></div>
+<ul class="simple">
+<li>Template Directory: <code class="docutils literal notranslate"><span class="pre">vast/templates/weather_vizv2</span></code></li>
+<li>Views Directory: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_vizv2/</span></code></li>
+<li>Landing URL: <code class="docutils literal notranslate"><span class="pre">vw/visualize_position</span></code></li>
+<li>Landing View: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/views_weather_visualization.visualize_position</span></code></li>
+<li>Landing Page Template: <code class="docutils literal notranslate"><span class="pre">vast/templates/weather_vizv2/visualize_position.html</span></code></li>
+</ul>
+<div class="section" id="front-end">
+<h2>Front End<a class="headerlink" href="#front-end" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Scripts:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">plot_vessel.js</span></code> : All vessel related tasks: Plotting vessels on map, handling events on vessel click etc.</li>
+<li><code class="docutils literal notranslate"><span class="pre">recommended_route.js</span></code> : Route plotting</li>
+<li><code class="docutils literal notranslate"><span class="pre">historical_track.js</span></code> : Historical tracks of ships</li>
+<li><code class="docutils literal notranslate"><span class="pre">geo_fence.js</span></code> : Geo Fence Module.</li>
+<li><code class="docutils literal notranslate"><span class="pre">hra_points.js</span></code> : Plotting HRA/VRA areas.</li>
+<li><code class="docutils literal notranslate"><span class="pre">weather_vis.js</span></code> : Weather layers plotting</li>
+<li><code class="docutils literal notranslate"><span class="pre">draw_on_map.js</span></code> : Line Plotting functions.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="back-end">
+<h2>Back End<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>Vessel Modal Backend</dt>
+<dd><span class="target" id="module-vast.views_weather_vizv2.main_handler"></span><dl class="first last function">
+<dt id="vast.views_weather_vizv2.main_handler.get_visualize_data_of_ship">
+<code class="descclassname">vast.views_weather_vizv2.main_handler.</code><code class="descname">get_visualize_data_of_ship</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_vizv2.main_handler.get_visualize_data_of_ship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main handler of the url get_visualize_data_of_ship
+Routes the request to the appropriate module that handles requests for a particular section.</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+</div>
+</div>
 
 
            </div>

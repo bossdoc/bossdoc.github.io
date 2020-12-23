@@ -3,9 +3,29 @@
 Weather Viz V2
 ==============
 
-Template Directory: ``vast/templates/weather_vizv2``
-Views Directory: ``vast/views_weather_vizv2/``
+* Template Directory: ``vast/templates/weather_vizv2``
+* Views Directory: ``vast/views_weather_vizv2/``
+* Landing URL: ``vw/visualize_position``
+* Landing View: ``vast/views_weather_routing/views_weather_visualization.visualize_position``
+* Landing Page Template: ``vast/templates/weather_vizv2/visualize_position.html``
 
-.. automodule:: vast.views_weather_vizv2
-	:members:
+Front End
+---------
+
+Scripts:
+	* ``plot_vessel.js`` : All vessel related tasks: Plotting vessels on map, handling events on vessel click etc. 
+	* ``recommended_route.js`` : Route plotting
+	* ``historical_track.js`` : Historical tracks of ships
+	* ``geo_fence.js`` : Geo Fence Module.
+	* ``hra_points.js`` : Plotting HRA/VRA areas.
+	* ``weather_vis.js`` : Weather layers plotting
+	* ``draw_on_map.js`` : Line Plotting functions. 
+
+
+Back End
+--------
+
+	Vessel Modal Backend
+		.. automodule:: vast.views_weather_vizv2.main_handler
+			:members:
 
