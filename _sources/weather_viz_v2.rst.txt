@@ -1,0 +1,11 @@
+.. _weather_viz_v2:
+
+Weather Viz V2
+==============
+
+Template Directory: ``vast/templates/weather_vizv2``
+Views Directory: ``vast/views_weather_vizv2/``
+
+.. automodule:: vast.views_weather_vizv2
+	:members:
+

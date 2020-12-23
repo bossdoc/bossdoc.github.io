@@ -21,6 +21,7 @@ Welcome to boss's documentation!
    iva
    geo_helper
    spire_position
+   weather_viz_v2
 
 Indices and tables
 ==================
