@@ -201,6 +201,66 @@ Routes the request to the appropriate module that handles requests for a particu
 
 </dd>
 </dl>
+<p>Weather Tiles Generator</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">generare_tiles.py</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">Tiles generator management command for weather types [wind,wavcomb,pressur,swell]</span></dt>
+<dd><dl class="first docutils">
+<dt>Run command:</dt>
+<dd><p class="first last">python manage.py generare_tiles</p>
+</dd>
+</dl>
+<p>Default: Reads all files in the date range (DELETE_PAST_DAYS_BEFORE,MAX_FUTURE_DAYS)</p>
+<p>Arguments:(Optional)</p>
+<ul class="last simple">
+<li><dl class="first docutils">
+<dt>-f –file</dt>
+<dd>python manage.py generare_tiles -f wavcomb_2021-02-27_00.json</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>-d –date (%d-%m-%Y)</dt>
+<dd>python manage.py generare_tiles -d 27-02-2021</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>XYZ Map Tiles</p>
+<ul>
+<li><p class="first">Weather Tiles Directory: <code class="docutils literal notranslate"><span class="pre">Data/MapTiles</span></code></p>
+</li>
+<li><p class="first">MapBox Tiles Directory: <code class="docutils literal notranslate"><span class="pre">Data/MapBox</span></code></p>
+</li>
+<li><p class="first">View Path: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/map_tiles.py</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">map_tiles.weathertiles</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">Takes weather_field, date_str and {x} {y} {z} as url params and returns weather heatmap tiles</span></dt>
+<dd><dl class="first last docutils">
+<dt>Syntax::</dt>
+<dd>/vw/map_tiles/${date_str}/${weather_field}/{z}/{x}/{y}.jpg</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">map_tiles.mapbox</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">Takes {x} {y} {z} as url params and returns transparent tiles</span></dt>
+<dd><dl class="first last docutils">
+<dt>Syntax::</dt>
+<dd>/vw/mapbox/{z}/{x}/{y}.png</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
 </div></blockquote>
 </div>
 </div>
