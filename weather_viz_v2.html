@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ship Modelling Fitter" href="ship_modelling.html" />
     <link rel="prev" title="Spire Position" href="spire_position.html" /> 
 </head>
 
@@ -98,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#back-end">Back End</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling Fitter</a></li>
 </ul>
 
             
@@ -205,10 +207,10 @@ Routes the request to the appropriate module that handles requests for a particu
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">generare_tiles.py</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">Tiles generator management command for weather types [wind,wavcomb,pressur,swell]</span></dt>
+<dt><code class="docutils literal notranslate"><span class="pre">generate_tiles.py</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">Tiles generator management command for weather types [wind,wavcomb,pressur,swell]</span></dt>
 <dd><dl class="first docutils">
 <dt>Run command:</dt>
-<dd><p class="first last">python manage.py generare_tiles</p>
+<dd><p class="first last">python manage.py generate_tiles</p>
 </dd>
 </dl>
 <p>Default: Reads all files in the date range (DELETE_PAST_DAYS_BEFORE,MAX_FUTURE_DAYS)</p>
@@ -216,12 +218,12 @@ Routes the request to the appropriate module that handles requests for a particu
 <ul class="last simple">
 <li><dl class="first docutils">
 <dt>-f –file</dt>
-<dd>python manage.py generare_tiles -f wavcomb_2021-02-27_00.json</dd>
+<dd>python manage.py generate_tiles -f wavcomb_2021-02-27_00.json</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>-d –date (%d-%m-%Y)</dt>
-<dd>python manage.py generare_tiles -d 27-02-2021</dd>
+<dd>python manage.py generate_tiles -d 27-02-2021</dd>
 </dl>
 </li>
 </ul>
@@ -272,6 +274,8 @@ Routes the request to the appropriate module that handles requests for a particu
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ship_modelling.html" class="btn btn-neutral float-right" title="Ship Modelling Fitter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="spire_position.html" class="btn btn-neutral float-left" title="Spire Position" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

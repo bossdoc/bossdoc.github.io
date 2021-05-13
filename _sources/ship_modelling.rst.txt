@@ -1,0 +1,17 @@
+.. _ship_modelling:
+
+Ship Modelling Fitter
+=====================
+
+* Template Directory: ``vast/templates/ship_modelling``
+* Views Directory: ``vast/views_weather_routing/``
+* Landing URL: ``vw/ship_modelling_fitter``
+* Landing View: ``vast/views_weather_routing/views_ship_modelling.ship_modelling_fitter``
+* Landing Page Template: ``vast/templates/ship_modelling/ship_modelling_fitter.html``
+
+Back End
+--------
+
+	Ship Modelling Backend
+		.. automodule:: vast.views_weather_routing.views_ship_modelling
+			:members:

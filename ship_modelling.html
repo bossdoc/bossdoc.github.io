@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Capt-N &mdash; BOSS  documentation</title>
+  <title>Ship Modelling Fitter &mdash; BOSS  documentation</title>
   
 
   
@@ -35,8 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="IVA" href="iva.html" />
-    <link rel="prev" title="Post Voyage" href="post_voyage.html" /> 
+    <link rel="prev" title="Weather Viz V2" href="weather_viz_v2.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,12 +89,15 @@
 <li class="toctree-l1"><a class="reference internal" href="mirror.html">Mirror Offline HTML Form</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mirror.html#mirror-backend">Mirror Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="post_voyage.html">Post Voyage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Capt-N</a></li>
+<li class="toctree-l1"><a class="reference internal" href="captn.html">Capt-N</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iva.html">IVA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="geo_helper.html">Geo Helper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weather_viz_v2.html">Weather Viz V2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling Fitter</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ship Modelling Fitter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#back-end">Back End</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -141,13 +143,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Capt-N</li>
+      <li>Ship Modelling Fitter</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/captn.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/ship_modelling.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,9 +162,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="capt-n">
-<span id="captn"></span><h1>Capt-N<a class="headerlink" href="#capt-n" title="Permalink to this headline">¶</a></h1>
-<p>This is placeholder documentation</p>
+  <div class="section" id="ship-modelling-fitter">
+<span id="ship-modelling"></span><h1>Ship Modelling Fitter<a class="headerlink" href="#ship-modelling-fitter" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Template Directory: <code class="docutils literal notranslate"><span class="pre">vast/templates/ship_modelling</span></code></li>
+<li>Views Directory: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/</span></code></li>
+<li>Landing URL: <code class="docutils literal notranslate"><span class="pre">vw/ship_modelling_fitter</span></code></li>
+<li>Landing View: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/views_ship_modelling.ship_modelling_fitter</span></code></li>
+<li>Landing Page Template: <code class="docutils literal notranslate"><span class="pre">vast/templates/ship_modelling/ship_modelling_fitter.html</span></code></li>
+</ul>
+<div class="section" id="back-end">
+<h2>Back End<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>Ship Modelling Backend</dt>
+<dd><span class="target" id="module-vast.views_weather_routing.views_ship_modelling"></span><dl class="first function">
+<dt id="vast.views_weather_routing.views_ship_modelling.fit_ship_hydrodynamic_model">
+<code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">fit_ship_hydrodynamic_model</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.fit_ship_hydrodynamic_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get data from request,
+Ship list: list of ship list from input
+Model_data: model data for ship_list,
+ship_details: accuracy metrics for ship_list
+return response for fitting the model</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_weather_routing.views_ship_modelling.get_hydrodynamic_model_info">
+<code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">get_hydrodynamic_model_info</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.get_hydrodynamic_model_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hydrodynamic model: Ship_hydrodynamic_model object
+return hydrodynamic model info as a response</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_weather_routing.views_ship_modelling.get_ship_modelids">
+<code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">get_ship_modelids</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.get_ship_modelids" title="Permalink to this definition">¶</a></dt>
+<dd><p>ship_models: list of Ship_hydrodynamic_model objects
+return response list of model IDs</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_weather_routing.views_ship_modelling.save_model_data">
+<code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">save_model_data</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.save_model_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return success response on saving the model data</p>
+</dd></dl>
+
+<dl class="last function">
+<dt id="vast.views_weather_routing.views_ship_modelling.ship_modelling_fitter">
+<code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">ship_modelling_fitter</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.ship_modelling_fitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>ship_list: list of objects of models.Ship class.
+others are data filtering parameters.
+Render ship modelling template</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+</div>
 </div>
 
 
@@ -173,10 +228,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="iva.html" class="btn btn-neutral float-right" title="IVA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="post_voyage.html" class="btn btn-neutral float-left" title="Post Voyage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="weather_viz_v2.html" class="btn btn-neutral float-left" title="Weather Viz V2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

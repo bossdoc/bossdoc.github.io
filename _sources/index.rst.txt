@@ -22,6 +22,7 @@ Welcome to boss's documentation!
    geo_helper
    spire_position
    weather_viz_v2
+   ship_modelling
 
 Indices and tables
 ==================

@@ -31,18 +31,18 @@ Back End
 	
 	Weather Tiles Generator
 
-		* ``generare_tiles.py`` : Tiles generator management command for weather types [wind,wavcomb,pressur,swell]
+		* ``generate_tiles.py`` : Tiles generator management command for weather types [wind,wavcomb,pressur,swell]
 			Run command:
-				python manage.py generare_tiles
+				python manage.py generate_tiles
 			
 			Default: Reads all files in the date range (DELETE_PAST_DAYS_BEFORE,MAX_FUTURE_DAYS)
 
 			Arguments:(Optional)
 
 			- -f --file
-				python manage.py generare_tiles -f wavcomb_2021-02-27_00.json
+				python manage.py generate_tiles -f wavcomb_2021-02-27_00.json
 			- -d --date (%d-%m-%Y)
-				python manage.py generare_tiles -d 27-02-2021
+				python manage.py generate_tiles -d 27-02-2021
 
 	XYZ Map Tiles
 
