@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Ship Modelling Fitter &mdash; BOSS  documentation</title>
+  <title>Ship Modelling &mdash; BOSS  documentation</title>
   
 
   
@@ -94,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="geo_helper.html">Geo Helper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weather_viz_v2.html">Weather Viz V2</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Ship Modelling Fitter</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ship Modelling</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#back-end">Back End</a></li>
 </ul>
 </li>
@@ -143,7 +143,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Ship Modelling Fitter</li>
+      <li>Ship Modelling</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,8 +162,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="ship-modelling-fitter">
-<span id="ship-modelling"></span><h1>Ship Modelling Fitter<a class="headerlink" href="#ship-modelling-fitter" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="ship-modelling">
+<span id="id1"></span><h1>Ship Modelling<a class="headerlink" href="#ship-modelling" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li>Template Directory: <code class="docutils literal notranslate"><span class="pre">vast/templates/ship_modelling</span></code></li>
 <li>Views Directory: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/</span></code></li>
@@ -206,12 +206,44 @@ return response list of model IDs</p>
 <dd><p>Return success response on saving the model data</p>
 </dd></dl>
 
-<dl class="last function">
+<dl class="function">
 <dt id="vast.views_weather_routing.views_ship_modelling.ship_modelling_fitter">
 <code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">ship_modelling_fitter</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.ship_modelling_fitter" title="Permalink to this definition">¶</a></dt>
 <dd><p>ship_list: list of objects of models.Ship class.
 others are data filtering parameters.
 Render ship modelling template</p>
+</dd></dl>
+
+<dl class="last function">
+<dt id="vast.views_weather_routing.views_ship_modelling.update_voyages_linked_to_model">
+<code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">update_voyages_linked_to_model</code><span class="sig-paren">(</span><em>hydrodynamic_model</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.update_voyages_linked_to_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update constants of voyages linked with the given hydrodynamic_model</p>
+</dd></dl>
+
+</dd>
+<dt>Save AWT metadata</dt>
+<dd><span class="target" id="module-vast.views_boss_capt.test_perf_data_analysis"></span><dl class="first function">
+<dt id="vast.views_boss_capt.test_perf_data_analysis.creating_json">
+<code class="descclassname">vast.views_boss_capt.test_perf_data_analysis.</code><code class="descname">creating_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.test_perf_data_analysis.creating_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the meta data for AWT</p>
+<p>Create a folder place all the csv files in it and provide the path.</p>
+<p>It will read all the csv files and will create metadata for it outside the folder
+File structure:</p>
+<p>script.py</p>
+<p>meta_data.json
+csv folder/</p>
+<blockquote>
+<div><p>csvfile1.csv</p>
+<p>csvfile2.csv</p>
+<p>csvfile3.csv</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="last function">
+<dt id="vast.views_boss_capt.test_perf_data_analysis.list_of_dpnItems">
+<code class="descclassname">vast.views_boss_capt.test_perf_data_analysis.</code><code class="descname">list_of_dpnItems</code><span class="sig-paren">(</span><em>shipIMOs</em>, <em>start_date</em>, <em>end_date</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.test_perf_data_analysis.list_of_dpnItems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes list of shipIMOs, start date and end date as input parameter
+Returns list of dpnItems for each shipIMO</p>
 </dd></dl>
 
 </dd>

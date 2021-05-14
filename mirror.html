@@ -106,7 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="geo_helper.html">Geo Helper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weather_viz_v2.html">Weather Viz V2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling Fitter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling</a></li>
 </ul>
 
             
@@ -203,22 +203,26 @@
 <h1>Mirror Backend<a class="headerlink" href="#mirror-backend" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="read-mail-management-command">
 <h2>Read Mail management Command<a class="headerlink" href="#read-mail-management-command" title="Permalink to this headline">¶</a></h2>
-<p>-There is a management command named read_mail which automatically reads the mail and extract the encoded data and submit it into our systems.
--There is a function named read_content_from_mail which is automatically triggered after regular intervals through this management command which submits the mirror reports into the system in these intervals.</p>
+<ul class="simple">
+<li>There is a management command named read_mail which automatically reads the mail and extract the encoded data and submit it into our systems.</li>
+<li>There is a function named read_content_from_mail which is automatically triggered after regular intervals through this management command which submits the mirror reports into the system in these intervals.</li>
+</ul>
 </div>
 <div class="section" id="passing-encoded-data-manually-in-mirror-backend-system">
 <h2>Passing Encoded Data Manually in Mirror Backend System<a class="headerlink" href="#passing-encoded-data-manually-in-mirror-backend-system" title="Permalink to this headline">¶</a></h2>
-<p>-In the read_mail.py management command file , in its class Command there is a function named handle, in that function just copy and paste your encoded data in the variable named “data” and comment line which is calling read_content_from_mail function because it is meant to read data on the mail server.
--After commenting the line in above step, uncomment line that calls views_receive_data.save_data_from_mail(data) function, This is the main function that handles the mirror data and does the job.
--If we are adding any module it has to start with this function</p>
+<ul class="simple">
+<li>In the read_mail.py management command file , in its class Command there is a function named handle, in that function just copy and paste your encoded data in the variable named “data” and comment line which is calling read_content_from_mail function because it is meant to read data on the mail server.</li>
+<li>After commenting the line in above step, uncomment line that calls views_receive_data.save_data_from_mail(data) function, This is the main function that handles the mirror data and does the job.</li>
+<li>If we are adding any module it has to start with this function</li>
+</ul>
 </div>
 <div class="section" id="adding-new-section-like-for-e-g-machinery-details">
 <h2>Adding new Section like for e.g- Machinery Details<a class="headerlink" href="#adding-new-section-like-for-e-g-machinery-details" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>In views_receive_data.save_data_from_mail function search for line that says “get_meta_fields” , This function returns all the table column names as an array which we will be requiring later.</li>
+<li>A bit below this line there is “prepare_dict_for_noon” where we are required to pass noon_data(the whole data which we have decoded already) , meta fields generated in above step, and d_type which is a parameter that can be utilized for some unique work we require to perform in this specific funtion.</li>
+<li>Add the dictionary prepared in above step in dict_model_mapping, then add key in seq_mapper</li>
 </ul>
-<p>-A bit below this line there is “prepare_dict_for_noon” where we are required to pass noon_data(the whole data which we have decoded already) , meta fields generated in above step, and d_type which is a parameter that can be utilized for some unique work we require to perform in this specific funtion.
--Add the dictionary prepared in above step in dict_model_mapping, then add key in seq_mapper</p>
 </div>
 </div>
 

@@ -1,7 +1,7 @@
 .. _ship_modelling:
 
-Ship Modelling Fitter
-=====================
+Ship Modelling
+==============
 
 * Template Directory: ``vast/templates/ship_modelling``
 * Views Directory: ``vast/views_weather_routing/``
@@ -14,4 +14,8 @@ Back End
 
 	Ship Modelling Backend
 		.. automodule:: vast.views_weather_routing.views_ship_modelling
+			:members:
+
+	Save AWT metadata
+		.. automodule:: vast.views_boss_capt.test_perf_data_analysis
 			:members:
