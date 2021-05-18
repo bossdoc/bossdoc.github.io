@@ -95,6 +95,8 @@
 <li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weather_viz_v2.html">Weather Viz V2</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Ship Modelling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-things-up">Setting things up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-modules">Main Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#back-end">Back End</a></li>
 </ul>
 </li>
@@ -164,13 +166,35 @@
             
   <div class="section" id="ship-modelling">
 <span id="id1"></span><h1>Ship Modelling<a class="headerlink" href="#ship-modelling" title="Permalink to this headline">¶</a></h1>
+<p>Basic idea: Fit fair weather models for RPM-Speed, RPM-Consumption and have a set of weather retardation profiles. Differences from previous setup:</p>
+<ul class="simple">
+<li>Models are now ship specific instead of being voyage specific. They are linked to voyages. constants field of <code class="docutils literal notranslate"><span class="pre">Voyage</span></code> model should mirror the constants field of <code class="docutils literal notranslate"><span class="pre">Ship_hydrodynamic_model</span></code>.</li>
+<li>Difference in empirical model: Model is now of type <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">a*x^b</span> <span class="pre">+</span> <span class="pre">c</span></code> instead of <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">a*x^b</span></code>.</li>
+<li>Difference in retardation profiles: Earlier, we were using Hw, Hs constants etc. pretty much the same across all models. Now we have the functionality to store a set of retardation profiles by fitting these constatns on speed in different Bft and directions.</li>
+</ul>
+<div class="section" id="setting-things-up">
+<h2>Setting things up<a class="headerlink" href="#setting-things-up" title="Permalink to this headline">¶</a></h2>
+<p>The new system relies on some data files - like additional noon report data given by oldendorff, IHS ship particulars and weather retardation profiles csv. Follow the following steps in order.</p>
+<ul class="simple">
+<li>Create a <code class="docutils literal notranslate"><span class="pre">Data/AWTData</span></code> directory. It should contain <code class="docutils literal notranslate"><span class="pre">data_file</span> <span class="pre">xxx-xxx.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">IHS_small.json</span></code>, <code class="docutils literal notranslate"><span class="pre">IHS.json</span></code>, <code class="docutils literal notranslate"><span class="pre">IHS.xslx</span></code>, <code class="docutils literal notranslate"><span class="pre">WeatheRetardationData.csv</span></code>.</li>
+<li>Generate <code class="docutils literal notranslate"><span class="pre">Data/AWTData/meta_data.json</span></code> by calling <code class="docutils literal notranslate"><span class="pre">get_metadata_from_csvs</span></code> in <code class="docutils literal notranslate"><span class="pre">awt_data_processor.py</span></code></li>
+<li>Convert IHS excel to json (if it’s not already there) using <code class="docutils literal notranslate"><span class="pre">convert_IHS_excel_to_json</span></code> function in <code class="docutils literal notranslate"><span class="pre">awt_data_processor.py</span></code>.</li>
+<li>Populate retardation profile table in database by calling <code class="docutils literal notranslate"><span class="pre">update_weather_constants</span></code> from <code class="docutils literal notranslate"><span class="pre">weather_retardation_profiling.py</span></code>.</li>
+<li>Create an initial set of laden and ballast ship models using <code class="docutils literal notranslate"><span class="pre">fill_hydrodynamic_model_table</span></code> from <code class="docutils literal notranslate"><span class="pre">fill_ship_models.py</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="main-modules">
+<h2>Main Modules<a class="headerlink" href="#main-modules" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Template Directory: <code class="docutils literal notranslate"><span class="pre">vast/templates/ship_modelling</span></code></li>
-<li>Views Directory: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/</span></code></li>
-<li>Landing URL: <code class="docutils literal notranslate"><span class="pre">vw/ship_modelling_fitter</span></code></li>
-<li>Landing View: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/views_ship_modelling.ship_modelling_fitter</span></code></li>
-<li>Landing Page Template: <code class="docutils literal notranslate"><span class="pre">vast/templates/ship_modelling/ship_modelling_fitter.html</span></code></li>
+<li>Main views file: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/views_ship_modelling.py</span></code></li>
+<li>Fitting code: <code class="docutils literal notranslate"><span class="pre">vast/views_boss_capt/perf_data_analysis.py</span></code></li>
+<li>AWT data processing code: <code class="docutils literal notranslate"><span class="pre">vast/views_boss_capt/awt_data_processor.py</span></code></li>
+<li>Ship Model (used in simulation etc) : <code class="docutils literal notranslate"><span class="pre">vast/simulatorv2/Ship_Modelling/ship_model.py</span></code></li>
 </ul>
+<p>Ship Model Fitter - This is the module to fit a new model, or update and analyze an existing model on a given set of data. User can choose to filter the data of the selected vessel + optional additional vessels/IMOs and define filtering criterea like dates, condition etc. The system fits a dynamic model on the dataset and provides a comparison against the selected model.</p>
+<p>Ship Modelling Analyzer: Same as before.</p>
+</div>
 <div class="section" id="back-end">
 <h2>Back End<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h2>
 <blockquote>
@@ -222,28 +246,23 @@ Render ship modelling template</p>
 
 </dd>
 <dt>Save AWT metadata</dt>
-<dd><span class="target" id="module-vast.views_boss_capt.test_perf_data_analysis"></span><dl class="first function">
-<dt id="vast.views_boss_capt.test_perf_data_analysis.creating_json">
-<code class="descclassname">vast.views_boss_capt.test_perf_data_analysis.</code><code class="descname">creating_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.test_perf_data_analysis.creating_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves the meta data for AWT</p>
-<p>Create a folder place all the csv files in it and provide the path.</p>
-<p>It will read all the csv files and will create metadata for it outside the folder
-File structure:</p>
-<p>script.py</p>
-<p>meta_data.json
-csv folder/</p>
-<blockquote>
-<div><p>csvfile1.csv</p>
-<p>csvfile2.csv</p>
-<p>csvfile3.csv</p>
-</div></blockquote>
+<dd><span class="target" id="module-vast.views_boss_capt.awt_data_processor"></span><dl class="first function">
+<dt id="vast.views_boss_capt.awt_data_processor.get_awt_noon_data">
+<code class="descclassname">vast.views_boss_capt.awt_data_processor.</code><code class="descname">get_awt_noon_data</code><span class="sig-paren">(</span><em>shipIMOs</em>, <em>start_date</em>, <em>end_date</em>, <em>convert_to_noon_fromat=False</em>, <em>csv_dir='Data/AWTData/'</em>, <em>meta_data_path='Data/AWTData/meta_data.json'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.awt_data_processor.get_awt_noon_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes list of shipIMOs, start date and end date as input parameter
+Returns list of dpnItems for each shipIMO</p>
 </dd></dl>
 
 <dl class="last function">
-<dt id="vast.views_boss_capt.test_perf_data_analysis.list_of_dpnItems">
-<code class="descclassname">vast.views_boss_capt.test_perf_data_analysis.</code><code class="descname">list_of_dpnItems</code><span class="sig-paren">(</span><em>shipIMOs</em>, <em>start_date</em>, <em>end_date</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.test_perf_data_analysis.list_of_dpnItems" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes list of shipIMOs, start date and end date as input parameter
-Returns list of dpnItems for each shipIMO</p>
+<dt id="vast.views_boss_capt.awt_data_processor.get_metadata_from_csvs">
+<code class="descclassname">vast.views_boss_capt.awt_data_processor.</code><code class="descname">get_metadata_from_csvs</code><span class="sig-paren">(</span><em>csv_dir='Data/AWTData/'</em>, <em>output_path='Data/AWTData/meta_data.json'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.awt_data_processor.get_metadata_from_csvs" title="Permalink to this definition">¶</a></dt>
+<dd><p>To create meta_data.json for csv files
+create a folder and place csv files in it.</p>
+<p>csv_dir:give the folder name or folder path in the variable ‘directory’.</p>
+<p>Then run the this function,
+it will create meta_data.json in the same directory as the folder i.e. csv_dir.</p>
+<p>csv_dir : Dir. containing all the awt csvs.
+csv_dir/meta_data.json : meta data for awt csvs.</p>
 </dd></dl>
 
 </dd>

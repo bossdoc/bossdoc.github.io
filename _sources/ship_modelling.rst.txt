@@ -3,11 +3,39 @@
 Ship Modelling
 ==============
 
+Basic idea: Fit fair weather models for RPM-Speed, RPM-Consumption and have a set of weather retardation profiles. Differences from previous setup:
+
+* Models are now ship specific instead of being voyage specific. They are linked to voyages. constants field of ``Voyage`` model should mirror the constants field of ``Ship_hydrodynamic_model``.
+* Difference in empirical model: Model is now of type ``y = a*x^b + c`` instead of ``y = a*x^b``.
+* Difference in retardation profiles: Earlier, we were using Hw, Hs constants etc. pretty much the same across all models. Now we have the functionality to store a set of retardation profiles by fitting these constatns on speed in different Bft and directions. 
+
+Setting things up
+-----------------
+
+The new system relies on some data files - like additional noon report data given by oldendorff, IHS ship particulars and weather retardation profiles csv. Follow the following steps in order.
+
+* Create a ``Data/AWTData`` directory. It should contain ``data_file xxx-xxx.csv``, ``IHS_small.json``, ``IHS.json``, ``IHS.xslx``, ``WeatheRetardationData.csv``.
+* Generate ``Data/AWTData/meta_data.json`` by calling ``get_metadata_from_csvs`` in ``awt_data_processor.py``
+* Convert IHS excel to json (if it's not already there) using ``convert_IHS_excel_to_json`` function in ``awt_data_processor.py``.
+* Populate retardation profile table in database by calling ``update_weather_constants`` from ``weather_retardation_profiling.py``.
+* Create an initial set of laden and ballast ship models using ``fill_hydrodynamic_model_table`` from ``fill_ship_models.py``.
+
+Main Modules
+------------
+
 * Template Directory: ``vast/templates/ship_modelling``
-* Views Directory: ``vast/views_weather_routing/``
-* Landing URL: ``vw/ship_modelling_fitter``
-* Landing View: ``vast/views_weather_routing/views_ship_modelling.ship_modelling_fitter``
-* Landing Page Template: ``vast/templates/ship_modelling/ship_modelling_fitter.html``
+* Main views file: ``vast/views_weather_routing/views_ship_modelling.py``
+* Fitting code: ``vast/views_boss_capt/perf_data_analysis.py``
+* AWT data processing code: ``vast/views_boss_capt/awt_data_processor.py``
+* Ship Model (used in simulation etc) : ``vast/simulatorv2/Ship_Modelling/ship_model.py``
+
+
+Ship Model Fitter - This is the module to fit a new model, or update and analyze an existing model on a given set of data. User can choose to filter the data of the selected vessel + optional additional vessels/IMOs and define filtering criterea like dates, condition etc. The system fits a dynamic model on the dataset and provides a comparison against the selected model.
+
+Ship Modelling Analyzer: Same as before.
+
+
+
 
 Back End
 --------
@@ -17,5 +45,5 @@ Back End
 			:members:
 
 	Save AWT metadata
-		.. automodule:: vast.views_boss_capt.test_perf_data_analysis
+		.. automodule:: vast.views_boss_capt.awt_data_processor
 			:members:
