@@ -17,6 +17,7 @@ The new system relies on some data files - like additional noon report data give
 * Create a ``Data/AWTData`` directory. It should contain ``data_file xxx-xxx.csv``, ``IHS_small.json``, ``IHS.json``, ``IHS.xslx``, ``WeatheRetardationData.csv``.
 * Generate ``Data/AWTData/meta_data.json`` by calling ``get_metadata_from_csvs`` in ``awt_data_processor.py``
 * Convert IHS excel to json (if it's not already there) using ``convert_IHS_excel_to_json`` function in ``awt_data_processor.py``.
+* Save a csv file in ``Data`` directory with name ``ship_data.csv`` and by calling the function ``add_sister_vessel_parameters`` from ``perf_data_analysis`` will save the values of ``length``, ``draft``, ``mcr``, ``mcr_power``, ``ship_ncr``, ``ncr_power``, ``draft``, ``tpc``, ``engine_type`` in ship model from csv file.
 * Populate retardation profile table in database by calling ``update_weather_constants`` from ``weather_retardation_profiling.py``.
 * Create an initial set of laden and ballast ship models using ``fill_hydrodynamic_model_table`` from ``fill_ship_models.py``.
 
