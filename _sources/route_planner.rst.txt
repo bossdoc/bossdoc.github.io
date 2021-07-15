@@ -1,0 +1,30 @@
+.. _route_planner:
+
+Route Planner
+==============
+Idea: On selecting particular ship one can select different positions or selected ship's current position to find the simulation data for that ship for those routes.
+
+* User is provided a table to fill details for the route. To select route, there is a dropdown for `Port/Vessel` from user can select any `Port` or `Vessel`
+* User is also provided additional options such as, hiding all other vessels, showing all routing points, and an option to mark on map using which user can select any additional postion by clicking on a map.
+* Once the user added the route, a polyline is generated to show the route, user will have options to edit, delete or copy the route according to their need.
+* After the polyline is generated, user can now simulate and get data for added routes by clicking simulate button.
+* Table will be generated for all the saved route, on clicking view summary details, summary for that route can be downloaded in pdf format.
+
+Main Modules
+------------
+
+* Template Directory: ``vast/templates/weather_viz2``
+* Main views file: ``vast/views_weather_vizv2/routePlanner.py``
+* Simulation code: ``vast/simulatorv2/Voyage_PlannerSS.py``
+* Aquaplot code: ``vast/views_weather_routing/views_weather.py``
+
+Simulation : This is the module to get the simulation data for selected routes. User can updates value by given their own inputs according to their demands to the input table above the simualtion data to get idea about cost and consumption
+
+Aquaplot: This module is used to find the way points between every two selected positions.
+
+Back End
+--------
+
+    Route Planner Backend
+        .. automodule:: vast.views_weather_vizv2.routePlanner
+            :members:

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Voyage Simulator &mdash; BOSS  documentation</title>
+  <title>Docker Guide &mdash; BOSS  documentation</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Mirror Offline HTML Form" href="mirror.html" />
-    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
+    <link rel="next" title="Route Planner" href="route_planner.html" />
+    <link rel="prev" title="SQL Configuration" href="sql_configuration.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,7 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="writing_docs.html">Writing Docs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pytest.html">PyTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Voyage Simulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulator.html">Voyage Simulator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mirror.html">Mirror Offline HTML Form</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mirror.html#mirror-backend">Mirror Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="post_voyage.html">Post Voyage</a></li>
@@ -98,7 +98,11 @@
 <li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Docker Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-docker-image">Build Docker Image</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 </ul>
 
@@ -145,13 +149,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Voyage Simulator</li>
+      <li>Docker Guide</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/simulator.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/docker.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -164,9 +168,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="voyage-simulator">
-<span id="simulator"></span><h1>Voyage Simulator<a class="headerlink" href="#voyage-simulator" title="Permalink to this headline">¶</a></h1>
-<p>This is placeholder documentation</p>
+  <div class="section" id="docker-guide">
+<span id="id1"></span><h1>Docker Guide<a class="headerlink" href="#docker-guide" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Install Docker:  <a class="reference external" href="https://docs.docker.com/engine/install/">https://docs.docker.com/engine/install/</a></li>
+<li>Docker Image: <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/docker/Dockerfile</span></code></li>
+<li>Docker Compose Linux: <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/docker/linux/docker-compose.yml</span></code></li>
+<li>Docker Compose (Other OS): <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/docker/docker-compose.yml</span></code></li>
+</ul>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Install Docker using <a class="reference external" href="https://docs.docker.com/engine/install/">https://docs.docker.com/engine/install/</a></p>
+</div>
+<div class="section" id="build-docker-image">
+<h2>Build Docker Image<a class="headerlink" href="#build-docker-image" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Create a directory <code class="docutils literal notranslate"><span class="pre">docker_build_files</span></code>. Add these files inside it.
+Matplotlib <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip</a>
+Basemap <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip</a>
+requirements.txt <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/requirements.txt</span></code></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
+├── bossv2
+│   ├── Data
+│   ├── Logs
+│   ├── Virtual_Arrival
+│   ├── django-auth-adfs
+│   ├── manage.py
+│   ├── vast
+│   └── z.py
+├── Dockerfile
+├── docker_build_files
+│   ├──matplotlib-1.4.3.zip
+│   ├──requirements.txt
+│   ├──v1.1.0.zip
+└── docker-compose.yml
+</pre></div>
+</div>
+<ul class="simple">
+<li>Build Docker Image using</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build . &lt; Dockerfile -t imsahil007/boss:latest
+</pre></div>
+</div>
+<ul class="simple">
+<li>Run Docker Image using docker-compose. Add the docker.compose.yml file according to your os:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose up
+</pre></div>
+</div>
+<ul class="simple">
+<li>For terminating the instance:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose down
+</pre></div>
+</div>
+<ul class="simple">
+<li>Note: If you are not on Linux, change the IP in your settings.py SQL’s Configuration from 127.0.0.1 to host.docker.internal</li>
+</ul>
+</div>
 </div>
 
 
@@ -177,10 +237,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mirror.html" class="btn btn-neutral float-right" title="Mirror Offline HTML Form" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="route_planner.html" class="btn btn-neutral float-right" title="Route Planner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tutorial.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sql_configuration.html" class="btn btn-neutral float-left" title="SQL Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

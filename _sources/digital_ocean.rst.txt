@@ -1,0 +1,101 @@
+.. _digital_ocean:
+
+Digital Ocean Configuration
+==============================
+
+* Installation Script: ``vast/digital_ocean/boss_script_ubuntu16.sh``
+* Apache config: ``vw/digital_ocean/bossv2-apache.conf``
+* Matplotlib https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip
+* Basemap https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip
+
+
+Installation
+------------
+
+Give sudo access rights to the script
+
+.. code-block:: bash
+    
+    chmod +x boss_script_ubuntu16.sh
+
+
+Note: Use ``boss_script_ubuntu20.sh`` if you are on on Debian/ubuntu 20.04 or later. The only difference is it contains an updated MySQL version.
+
+Run the script. You can explicitly change the bossv2 directory according to the directory you run the script in.
+
+.. code-block:: bash
+    
+    ./boss_script_ubuntu16.sh
+
+
+
+Apache Configuration
+--------------------
+
+
+* If you followed the above steps correctly, you have apache2 installed on your system. 
+* Move ``bossv2-apache.conf`` to /etc/apache2/sites-available/
+
+.. code-block:: bash
+
+    mv bossv2-apache.conf /etc/apache2/sites-available/ 
+
+* Enable bossv2 apache
+  Note: You will have to update the path inside the apache conf according to your system
+  
+.. code-block:: bash
+
+    sudo a2ensite bossv2-apache.conf
+	sudo ufw allow 800
+    
+* Restart apache service
+    
+  .. code-block:: bash
+  
+	sudo systemctl reload apache2
+	sudo service apache2 restart
+
+Note: Give Permissions to your directories according to your directory tree structure. It should look something like this.
+
+
+.. code-block:: bash
+  
+	.
+	├── bossv2
+	│   ├── Data
+	│   ├── Logs
+	│   ├── Virtual_Arrival
+	│   ├── django-auth-adfs
+	│   ├── manage.py
+	│   ├── vast
+	│   └── z.py
+	├── historical_request_process_lock.py
+	├── mail_lock_process.py
+	├── raw_request_process_lock.py
+	└── weather_script.py
+
+
+Cron Jobs
+---------
+
+* Install Cron
+
+.. code-block:: bash
+
+    sudo apt install cron
+
+* Enable Cron
+
+.. code-block:: bash
+
+	sudo systemctl enable cron
+
+* Edit Crontab
+
+.. code-block:: bash
+
+	crontab -e
+
+Use ``vast/digital_ocean/Cron``. Change paths, username, database, password according to your Configuration requirement
+
+Note: Delete cron config using ``crontab -r``

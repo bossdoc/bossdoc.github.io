@@ -95,6 +95,10 @@
 <li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weather_viz_v2.html">Weather Viz V2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 </ul>
 
             
@@ -167,6 +171,7 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
@@ -219,13 +224,15 @@
 </li>
       <li><a href="geo_helper.html#vast.simulatorv2.geo_helper.get_max_min_coord_of_polygon">get_max_min_coord_of_polygon() (in module vast.simulatorv2.geo_helper)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ship_modelling.html#vast.views_boss_capt.awt_data_processor.get_metadata_from_csvs">get_metadata_from_csvs() (in module vast.views_boss_capt.awt_data_processor)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="spire_position.html#vast.management.commands.spire_position.get_plan_deviation_alert">get_plan_deviation_alert() (in module vast.management.commands.spire_position)</a>
 </li>
       <li><a href="ship_modelling.html#vast.views_weather_routing.views_ship_modelling.get_ship_modelids">get_ship_modelids() (in module vast.views_weather_routing.views_ship_modelling)</a>
+</li>
+      <li><a href="route_planner.html#vast.views_weather_vizv2.routePlanner.get_simulation_results">get_simulation_results() (in module vast.views_weather_vizv2.routePlanner)</a>
 </li>
       <li><a href="spire_position.html#vast.management.commands.spire_position.get_speed_value_alert">get_speed_value_alert() (in module vast.management.commands.spire_position)</a>
 </li>
@@ -254,16 +261,26 @@
   </ul></td>
 </tr></table>
 
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="route_planner.html#vast.views_weather_vizv2.routePlanner.rp_get_recommended_route">rp_get_recommended_route() (in module vast.views_weather_vizv2.routePlanner)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ship_modelling.html#vast.views_weather_routing.views_ship_modelling.save_model_data">save_model_data() (in module vast.views_weather_routing.views_ship_modelling)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="spire_position.html#vast.management.commands.spire_position.send_alert_for_a_geo_fence">send_alert_for_a_geo_fence() (in module vast.management.commands.spire_position)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ship_modelling.html#vast.views_weather_routing.views_ship_modelling.ship_modelling_fitter">ship_modelling_fitter() (in module vast.views_weather_routing.views_ship_modelling)</a>
+</li>
+      <li><a href="route_planner.html#vast.views_weather_vizv2.routePlanner.simulate_route_plans">simulate_route_plans() (in module vast.views_weather_vizv2.routePlanner)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -292,6 +309,8 @@
       <li><a href="ship_modelling.html#module-vast.views_weather_routing.views_ship_modelling">vast.views_weather_routing.views_ship_modelling (module)</a>
 </li>
       <li><a href="weather_viz_v2.html#module-vast.views_weather_vizv2.main_handler">vast.views_weather_vizv2.main_handler (module)</a>
+</li>
+      <li><a href="route_planner.html#module-vast.views_weather_vizv2.routePlanner">vast.views_weather_vizv2.routePlanner (module)</a>
 </li>
   </ul></td>
 </tr></table>

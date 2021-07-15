@@ -23,6 +23,10 @@ Welcome to boss's documentation!
    spire_position
    weather_viz_v2
    ship_modelling
+   digital_ocean
+   sql_configuration
+   docker
+   route_planner
 
 Indices and tables
 ==================

@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Digital Ocean Configuration" href="digital_ocean.html" />
     <link rel="prev" title="Weather Viz V2" href="weather_viz_v2.html" /> 
 </head>
 
@@ -100,6 +101,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#back-end">Back End</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 </ul>
 
             
@@ -195,6 +200,7 @@
 </ul>
 <p>Ship Model Fitter - This is the module to fit a new model, or update and analyze an existing model on a given set of data. User can choose to filter the data of the selected vessel + optional additional vessels/IMOs and define filtering criterea like dates, condition etc. The system fits a dynamic model on the dataset and provides a comparison against the selected model.</p>
 <p>Ship Modelling Analyzer: Same as before.</p>
+<p>Ship Model Accuracu Table - Shows the accuracy metrics of already fitted models and new dynamic models based on last 180 days noon data. Landing view - <code class="docutils literal notranslate"><span class="pre">views_ship_modelling.table_model_accuracy</span></code>. Management command to prepare the data <code class="docutils literal notranslate"><span class="pre">management/model_accuracy_table.py</span></code>. Main function that prepares the data <code class="docutils literal notranslate"><span class="pre">views_ship_modelling.model_accuracy_list</span></code>. View that renders the table <code class="docutils literal notranslate"><span class="pre">views_ship_modelling.get_all_ship_accuracy_data</span></code></p>
 </div>
 <div class="section" id="back-end">
 <h2>Back End<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h2>
@@ -227,7 +233,7 @@ return response list of model IDs</p>
 
 <dl class="function">
 <dt id="vast.views_weather_routing.views_ship_modelling.save_model_data">
-<code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">save_model_data</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.save_model_data" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_weather_routing.views_ship_modelling.</code><code class="descname">save_model_data</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_routing.views_ship_modelling.save_model_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return success response on saving the model data</p>
 </dd></dl>
 
@@ -279,6 +285,8 @@ csv_dir/meta_data.json : meta data for awt csvs.</p>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="digital_ocean.html" class="btn btn-neutral float-right" title="Digital Ocean Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="weather_viz_v2.html" class="btn btn-neutral float-left" title="Weather Viz V2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

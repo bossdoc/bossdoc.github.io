@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Writing Docs &mdash; BOSS  documentation</title>
+  <title>Digital Ocean Configuration &mdash; BOSS  documentation</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="PyTest" href="pytest.html" />
-    <link rel="prev" title="UI Standard" href="ui_standard.html" /> 
+    <link rel="next" title="SQL Configuration" href="sql_configuration.html" />
+    <link rel="prev" title="Ship Modelling" href="ship_modelling.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,13 +83,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ui_standard.html">UI Standard</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing Docs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#editing-docs">Editing Docs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#generating-html-from-docs">Generating Html from docs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-html-publishing-on-bossdoc-github-io">Writing HTML + Publishing on bossdoc.github.io</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="writing_docs.html">Writing Docs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pytest.html">PyTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulator.html">Voyage Simulator</a></li>
@@ -102,7 +96,12 @@
 <li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weather_viz_v2.html">Weather Viz V2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Digital Ocean Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#apache-configuration">Apache Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cron-jobs">Cron Jobs</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
@@ -151,13 +150,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Writing Docs</li>
+      <li>Digital Ocean Configuration</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/writing_docs.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/digital_ocean.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -170,40 +169,90 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="writing-docs">
-<span id="id1"></span><h1>Writing Docs<a class="headerlink" href="#writing-docs" title="Permalink to this headline">¶</a></h1>
-<p>We use the sphinx to document our code.</p>
+  <div class="section" id="digital-ocean-configuration">
+<span id="digital-ocean"></span><h1>Digital Ocean Configuration<a class="headerlink" href="#digital-ocean-configuration" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Installation Script: <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/boss_script_ubuntu16.sh</span></code></li>
+<li>Apache config: <code class="docutils literal notranslate"><span class="pre">vw/digital_ocean/bossv2-apache.conf</span></code></li>
+<li>Matplotlib <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip</a></li>
+<li>Basemap <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip</a></li>
+</ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Install the following packages using pip:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sphinx</span><span class="o">==</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">5</span>
-<span class="n">sphinx</span><span class="o">-</span><span class="n">rtd</span><span class="o">-</span><span class="n">theme</span><span class="o">==</span><span class="mf">0.4</span><span class="o">.</span><span class="mi">3</span>
-<span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">napoleon</span><span class="o">==</span><span class="mf">0.7</span>
-<span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">websupport</span><span class="o">==</span><span class="mf">1.1</span><span class="o">.</span><span class="mi">2</span>
+<p>Give sudo access rights to the script</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod +x boss_script_ubuntu16.sh
+</pre></div>
+</div>
+<p>Note: Use <code class="docutils literal notranslate"><span class="pre">boss_script_ubuntu20.sh</span></code> if you are on on Debian/ubuntu 20.04 or later. The only difference is it contains an updated MySQL version.</p>
+<p>Run the script. You can explicitly change the bossv2 directory according to the directory you run the script in.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./boss_script_ubuntu16.sh
 </pre></div>
 </div>
 </div>
-<div class="section" id="editing-docs">
-<h2>Editing Docs<a class="headerlink" href="#editing-docs" title="Permalink to this headline">¶</a></h2>
-<p>The docs are written in <code class="docutils literal notranslate"><span class="pre">rst</span></code> files in <code class="docutils literal notranslate"><span class="pre">vast/docs</span></code> directory. To add a new menu item edit <code class="docutils literal notranslate"><span class="pre">index.rst</span></code>. Edit the docs, follow examples in the existing ones to see how to insert code snippets and module documentations etc. Eg. see <code class="docutils literal notranslate"><span class="pre">iva.rst</span></code> for an example.</p>
-</div>
-<div class="section" id="generating-html-from-docs">
-<h2>Generating Html from docs<a class="headerlink" href="#generating-html-from-docs" title="Permalink to this headline">¶</a></h2>
-<p>Use the following command to generate the html code for the website in <code class="docutils literal notranslate"><span class="pre">vast/docs/_build/html</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+<div class="section" id="apache-configuration">
+<h2>Apache Configuration<a class="headerlink" href="#apache-configuration" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>If you followed the above steps correctly, you have apache2 installed on your system.</li>
+<li>Move <code class="docutils literal notranslate"><span class="pre">bossv2-apache.conf</span></code> to /etc/apache2/sites-available/</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mv bossv2-apache.conf /etc/apache2/sites-available/
 </pre></div>
 </div>
-<p>Use the following to generate <code class="docutils literal notranslate"><span class="pre">html</span></code> code in a particular directory</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="o">.</span> <span class="o">&lt;</span><span class="n">HTML</span> <span class="n">DIR</span><span class="o">&gt;</span>
+<ul class="simple">
+<li>Enable bossv2 apache
+Note: You will have to update the path inside the apache conf according to your system</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo a2ensite bossv2-apache.conf
+    sudo ufw allow <span class="m">800</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Restart apache service</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl reload apache2
+sudo service apache2 restart
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Note: Give Permissions to your directories according to your directory tree structure. It should look something like this.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
+├── bossv2
+│   ├── Data
+│   ├── Logs
+│   ├── Virtual_Arrival
+│   ├── django-auth-adfs
+│   ├── manage.py
+│   ├── vast
+│   └── z.py
+├── historical_request_process_lock.py
+├── mail_lock_process.py
+├── raw_request_process_lock.py
+└── weather_script.py
 </pre></div>
 </div>
 </div>
-<div class="section" id="writing-html-publishing-on-bossdoc-github-io">
-<h2>Writing HTML + Publishing on bossdoc.github.io<a class="headerlink" href="#writing-html-publishing-on-bossdoc-github-io" title="Permalink to this headline">¶</a></h2>
-<p>The following script will generate the html of docs, and publish it to bossdoc.github.io</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">publishdocs</span><span class="o">.</span><span class="n">py</span>
+<div class="section" id="cron-jobs">
+<h2>Cron Jobs<a class="headerlink" href="#cron-jobs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Install Cron</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install cron
 </pre></div>
 </div>
+<ul class="simple">
+<li>Enable Cron</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> cron
+</pre></div>
+</div>
+<ul class="simple">
+<li>Edit Crontab</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>crontab -e
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/Cron</span></code>. Change paths, username, database, password according to your Configuration requirement</p>
+<p>Note: Delete cron config using <code class="docutils literal notranslate"><span class="pre">crontab</span> <span class="pre">-r</span></code></p>
 </div>
 </div>
 
@@ -215,10 +264,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="pytest.html" class="btn btn-neutral float-right" title="PyTest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sql_configuration.html" class="btn btn-neutral float-right" title="SQL Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ui_standard.html" class="btn btn-neutral float-left" title="UI Standard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ship_modelling.html" class="btn btn-neutral float-left" title="Ship Modelling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -35,8 +35,7 @@ Ship Model Fitter - This is the module to fit a new model, or update and analyze
 
 Ship Modelling Analyzer: Same as before.
 
-
-
+Ship Model Accuracu Table - Shows the accuracy metrics of already fitted models and new dynamic models based on last 180 days noon data. Landing view - ``views_ship_modelling.table_model_accuracy``. Management command to prepare the data ``management/model_accuracy_table.py``. Main function that prepares the data ``views_ship_modelling.model_accuracy_list``. View that renders the table ``views_ship_modelling.get_all_ship_accuracy_data``
 
 Back End
 --------

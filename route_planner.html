@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; BOSS  documentation</title>
+  <title>Route Planner &mdash; BOSS  documentation</title>
   
 
   
@@ -35,8 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="UI Standard" href="ui_standard.html" />
-    <link rel="prev" title="Welcome to boss’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Docker Guide" href="docker.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -81,12 +80,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#getting-the-code">Getting the code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-dependencies">Installing Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-the-server">Running the server</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ui_standard.html">UI Standard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writing_docs.html">Writing Docs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pytest.html">PyTest</a></li>
@@ -104,7 +98,11 @@
 <li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Route Planner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main-modules">Main Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#back-end">Back End</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -150,13 +148,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Installation</li>
+      <li>Route Planner</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/route_planner.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -169,76 +167,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="installation">
-<span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>Following installation guide assumes a Unix based operating system. Make sure you have Python 2.7 installed. You will also need to install MySql Client 5.6.</p>
-<div class="section" id="getting-the-code">
-<h2>Getting the code<a class="headerlink" href="#getting-the-code" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">Clone the root BOSS directory containing <code class="docutils literal notranslate"><span class="pre">manage.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">Virtual_Arrival</span></code> directory.</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/paarthneekhara/BOSS_root
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p class="first">Download the data folder from <a class="reference external" href="https://drive.google.com/file/d/1qQ0sm4nmN9ACK0FKd6Kaaj45to_SqHc2/view?usp=sharing">here</a>, unzip it and place the <code class="docutils literal notranslate"><span class="pre">Data</span></code> directory inside <code class="docutils literal notranslate"><span class="pre">BOSS_root</span></code>.</p>
-</li>
-<li><p class="first">Inside the <code class="docutils literal notranslate"><span class="pre">BOSS_root</span></code> directory clone <code class="docutils literal notranslate"><span class="pre">vast</span></code>:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/paarthneekhara/vast
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-</ul>
-<p>The directory structure after these steps should look something like this:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>BOSS_root/
-        |-Data/
-        │-vast/
-        |-Virtual_Arrival/
-        |-manage.py
-</pre></div>
-</div>
+  <div class="section" id="route-planner">
+<span id="id1"></span><h1>Route Planner<a class="headerlink" href="#route-planner" title="Permalink to this headline">¶</a></h1>
+<p>Idea: On selecting particular ship one can select different positions or selected ship’s current position to find the simulation data for that ship for those routes.</p>
 <ul class="simple">
-<li>Next you will need to edit the <code class="docutils literal notranslate"><span class="pre">Virtual_Arrival/settings.py</span></code> and <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> for configuring mysql connection parameters of your machine.</li>
+<li>User is provided a table to fill details for the route. To select route, there is a dropdown for <cite>Port/Vessel</cite> from user can select any <cite>Port</cite> or <cite>Vessel</cite></li>
+<li>User is also provided additional options such as, hiding all other vessels, showing all routing points, and an option to mark on map using which user can select any additional postion by clicking on a map.</li>
+<li>Once the user added the route, a polyline is generated to show the route, user will have options to edit, delete or copy the route according to their need.</li>
+<li>After the polyline is generated, user can now simulate and get data for added routes by clicking simulate button.</li>
+<li>Table will be generated for all the saved route, on clicking view summary details, summary for that route can be downloaded in pdf format.</li>
 </ul>
-</div>
-<div class="section" id="installing-dependencies">
-<h2>Installing Dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">create a Python 2.7 virtual enviroment in <code class="docutils literal notranslate"><span class="pre">BOSS_root</span></code> as follows. If your default python version is 2.7, the following would work, other wise specify Python 2.7 path using <code class="docutils literal notranslate"><span class="pre">-p</span></code> option.</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virtualenv bossenv
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p class="first">Install all dependencies using</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
-</pre></div>
-</div>
-</div></blockquote>
-</li>
+<div class="section" id="main-modules">
+<h2>Main Modules<a class="headerlink" href="#main-modules" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Template Directory: <code class="docutils literal notranslate"><span class="pre">vast/templates/weather_viz2</span></code></li>
+<li>Main views file: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_vizv2/routePlanner.py</span></code></li>
+<li>Simulation code: <code class="docutils literal notranslate"><span class="pre">vast/simulatorv2/Voyage_PlannerSS.py</span></code></li>
+<li>Aquaplot code: <code class="docutils literal notranslate"><span class="pre">vast/views_weather_routing/views_weather.py</span></code></li>
 </ul>
+<p>Simulation : This is the module to get the simulation data for selected routes. User can updates value by given their own inputs according to their demands to the input table above the simualtion data to get idea about cost and consumption</p>
+<p>Aquaplot: This module is used to find the way points between every two selected positions.</p>
 </div>
-<div class="section" id="running-the-server">
-<h2>Running the server<a class="headerlink" href="#running-the-server" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">If everything worked correctly, you should be run the server using:</p>
+<div class="section" id="back-end">
+<h2>Back End<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py runserver
-</pre></div>
-</div>
+<div><dl class="docutils">
+<dt>Route Planner Backend</dt>
+<dd><span class="target" id="module-vast.views_weather_vizv2.routePlanner"></span><dl class="first function">
+<dt id="vast.views_weather_vizv2.routePlanner.get_simulation_results">
+<code class="descclassname">vast.views_weather_vizv2.routePlanner.</code><code class="descname">get_simulation_results</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_vizv2.routePlanner.get_simulation_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>ship_id: Id of the ship.
+route_data: Route data consist of Latitudes and longitudes between selected ports or vessels.</p>
+<p>dep_date: Departure date of the ship.</p>
+<p>condition: Condition - Laden or Ballast</p>
+<p>Returns simulation table for every route.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_weather_vizv2.routePlanner.rp_get_recommended_route">
+<code class="descclassname">vast.views_weather_vizv2.routePlanner.</code><code class="descname">rp_get_recommended_route</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_vizv2.routePlanner.rp_get_recommended_route" title="Permalink to this definition">¶</a></dt>
+<dd><p>voyage_id: Voyage Id</p>
+<p>pos_date: Date and Time</p>
+<p>returns recommended route for voyage corresponding to given date and time.</p>
+</dd></dl>
+
+<dl class="last function">
+<dt id="vast.views_weather_vizv2.routePlanner.simulate_route_plans">
+<code class="descclassname">vast.views_weather_vizv2.routePlanner.</code><code class="descname">simulate_route_plans</code><span class="sig-paren">(</span><em>model_constants</em>, <em>route_data</em>, <em>start_date</em>, <em>load_disp=None</em>, <em>ship=None</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_vizv2.routePlanner.simulate_route_plans" title="Permalink to this definition">¶</a></dt>
+<dd><p>modal_constants: Selected hydrodynamic model constants.</p>
+<p>route_data: Route data consist of Latitudes and longitudes between selected ports or vessels.</p>
+<p>start_date: Departure date of Ship.</p>
+<p>returns summary in pdf format with additional information</p>
+</dd></dl>
+
+</dd>
+</dl>
 </div></blockquote>
-</li>
-<li><p class="first">The following login screen should come up on accessing <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/vast/user_login</span></code></p>
-<blockquote>
-<div><img alt="_images/login.png" src="_images/login.png" />
-</div></blockquote>
-</li>
-</ul>
 </div>
 </div>
 
@@ -250,10 +234,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ui_standard.html" class="btn btn-neutral float-right" title="UI Standard" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to boss’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="docker.html" class="btn btn-neutral float-left" title="Docker Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

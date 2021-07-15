@@ -1,0 +1,61 @@
+.. _docker_guide:
+
+Docker Guide
+==============================
+* Install Docker:  https://docs.docker.com/engine/install/
+* Docker Image: ``vast/digital_ocean/docker/Dockerfile``
+* Docker Compose Linux: ``vast/digital_ocean/docker/linux/docker-compose.yml``
+* Docker Compose (Other OS): ``vast/digital_ocean/docker/docker-compose.yml``
+
+
+Installation
+------------
+
+Install Docker using https://docs.docker.com/engine/install/
+
+Build Docker Image
+------------------
+* Create a directory ``docker_build_files``. Add these files inside it.
+  Matplotlib https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip
+  Basemap https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip
+  requirements.txt ``vast/digital_ocean/requirements.txt``
+
+.. code-block:: bash
+    
+    .
+    ├── bossv2
+    │   ├── Data
+    │   ├── Logs
+    │   ├── Virtual_Arrival
+    │   ├── django-auth-adfs
+    │   ├── manage.py
+    │   ├── vast
+    │   └── z.py
+    ├── Dockerfile
+    ├── docker_build_files
+    │   ├──matplotlib-1.4.3.zip
+    │   ├──requirements.txt
+    │   ├──v1.1.0.zip
+    └── docker-compose.yml
+
+* Build Docker Image using
+
+.. code-block:: bash
+    
+    docker build . < Dockerfile -t imsahil007/boss:latest   
+
+* Run Docker Image using docker-compose. Add the docker.compose.yml file according to your os:
+  
+.. code-block:: bash
+    
+    docker-compose up
+
+* For terminating the instance:
+  
+.. code-block:: bash
+    
+    docker-compose down
+
+* Note: If you are not on Linux, change the IP in your settings.py SQL's Configuration from 127.0.0.1 to host.docker.internal
+
+

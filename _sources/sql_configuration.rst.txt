@@ -1,0 +1,58 @@
+.. _sql_configuration:
+
+SQL Configuration
+==============================
+
+Keys:
+
+$DATABASE - Name of your database  
+$USER - User Name  
+$PASSWORD - Password of USER  
+dumpfile.sql - SQL FILE  
+
+Follow these steps for a clean SQL database:
+--------------------------------------------
+* Create a new Database
+
+.. code-block:: sql
+    
+    create database DATABASE;
+    exit;
+
+* Make Migrations and migrate projects including current changes
+
+.. code-block:: python
+    
+    python manage.py makemigrations
+    python manage.py migrate
+
+* Load SQL from dump file
+
+.. code-block:: bash
+    
+    mysql DATABASE < dumpfile.sql
+
+Note: This will take some time to execute.
+
+* Some SQL Configuration
+
+.. code-block:: sql
+    
+    CREATE USER 'USER'@'127.0.0.1' IDENTIFIED WITH mysql_native_password BY PASSWORD;
+    /* Use the above query if you want to create a new database. Otherwise just alter the password using below query */
+    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY PASSWORD;
+    /* Use % in place of localhost for all IPs */
+    ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY PASSWORD;
+
+* Finally, execute:
+
+.. code-block:: sql
+    
+    /* For all Database access */
+    GRANT ALL PRIVILEGES ON *.* TO 'USER'@'%'
+    /* Otherwise */
+    GRANT ALL ON DATABASE.* TO 'USER'@'127.0.0.1';
+
+    
+    FLUSH  PRIVILEGES;
+    exit;
