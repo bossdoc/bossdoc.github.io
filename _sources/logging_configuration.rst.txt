@@ -1,0 +1,58 @@
+.. _logging_configuration:
+
+Logging Configuration
+==============================
+Pip Dependencies: 
+    -   ``logging``
+    -   ``raven``
+    -   ``colorlog``
+
+
+Add this to your settings.py
+
+.. code-block:: python
+    
+    LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'colored': {
+            '()': 'colorlog.ColoredFormatter',  # colored output
+            #'format': '%(log_color)s[%(levelname)s] %(asctime)s %(module)s :: %(message)s'-> Use this to print timestamps as well
+            'format': '%(log_color)s[%(levelname)s] %(module)s %(lineno)d :: %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'NOTSET',
+            # 'class': 'logging.StreamHandler',
+            'class': 'colorlog.StreamHandler',
+            'formatter': 'colored'
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'NOTSET',
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'ERROR'
+        }
+    }
+    }
+
+Use it in django using:
+
+.. code-block:: python
+    
+    import logging
+    logger = logging.getLogger(__name__)
+
+    
+    logger.debug("this is a debugging message")
+    logger.info("this is an informational message")
+    logger.warning("this is a warning message")
+    logger.error("this is an error message")
+    logger.critical("this is a critical message")	

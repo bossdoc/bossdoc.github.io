@@ -5,10 +5,10 @@ SQL Configuration
 
 Keys:
 
-$DATABASE - Name of your database  
-$USER - User Name  
-$PASSWORD - Password of USER  
-dumpfile.sql - SQL FILE  
+| ``DATABASE`` - Name of your database  
+| ``USER`` - User Name  
+| ``PASSWORD`` - Password of USER  
+| ``dumpfile.sql`` - SQL FILE  
 
 Follow these steps for a clean SQL database:
 --------------------------------------------

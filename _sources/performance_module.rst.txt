@@ -1,0 +1,43 @@
+.. _performance_module:
+
+Performance Module
+==================
+
+Main idea for fitting -- Get data as ship_wise_data from noon reports, VA or any other source. 
+Filter it using relevant filtering parameters (laden, ballast, wind force etc.). Add stw, perf_speed if needed.
+Fit models.
+
+Eg.
+
+.. code-block:: python
+	
+	def test_noon_data_ship_wise():
+		ship_list = models.Ship.objects.all().order_by("ship_name")[:100]
+		ship_list = list(ship_list)
+		filter_param = {
+			"wind_force"			: 	[0,6],
+			"condition"				: 	"All",
+			"speed_range"			: 	[6, 16]
+		}
+		date_to = datetime.now()
+		date_from = date_to - timedelta(days = 365)
+		
+
+		st = time.time()
+		ship_wise_data = perf_data_analysis.get_noon_data_ship_wise(ship_list, filter_param, date_from, date_to)
+		print("time to fetch data", time.time() - st)
+		perf_data_analysis.add_stw_and_perf_speed(ship_wise_data)
+		print("time to add stw/perf_speed data", time.time() - st)
+		perf_data_analysis.fit_vessel_performance_models(ship_wise_data, single_order_fitting=False, fit_intercept=True)
+		print("time to fit perf mdoels", time.time() - st)
+		perf_data_analysis.fit_vessel_performance_models_windowed(ship_wise_data, windowing_type="monthly")
+		print("time to fit windowed perf mdoels", time.time() - st)
+
+
+
+Back End
+--------
+
+	Performance Data Analysis
+		.. automodule:: vast.views_boss_capt.perf_data_analysis
+			:members:

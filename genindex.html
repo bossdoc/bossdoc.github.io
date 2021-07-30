@@ -97,7 +97,9 @@
 <li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging_configuration.html">Logging Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 </ul>
 
@@ -165,7 +167,8 @@
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#C"><strong>C</strong></a>
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
@@ -175,8 +178,21 @@
  | <a href="#S"><strong>S</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
  
 </div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.add_sister_vessel_parameters">add_sister_vessel_parameters() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.add_stw_and_perf_speed">add_stw_and_perf_speed() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -191,6 +207,8 @@
       <li><a href="geo_helper.html#vast.simulatorv2.geo_helper.check_inside_poly_basis_max_min_coord">check_inside_poly_basis_max_min_coord() (in module vast.simulatorv2.geo_helper)</a>
 </li>
       <li><a href="spire_position.html#vast.management.commands.spire_position.check_seca_eca_feeds">check_seca_eca_feeds() (in module vast.management.commands.spire_position)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.convert_fitted_models_to_ship_model_constants">convert_fitted_models_to_ship_model_constants() (in module vast.views_boss_capt.perf_data_analysis)</a>
 </li>
       <li><a href="spire_position.html#vast.management.commands.spire_position.create_geo_fencing_feed_list_db">create_geo_fencing_feed_list_db() (in module vast.management.commands.spire_position)</a>
 </li>
@@ -208,7 +226,25 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.filter_ship_wise_data">filter_ship_wise_data() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.find_model_accuracy">find_model_accuracy() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.find_sister_vessels">find_sister_vessels() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.fit_model_on_data">fit_model_on_data() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.fit_model_on_data_v2">fit_model_on_data_v2() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
       <li><a href="ship_modelling.html#vast.views_weather_routing.views_ship_modelling.fit_ship_hydrodynamic_model">fit_ship_hydrodynamic_model() (in module vast.views_weather_routing.views_ship_modelling)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models">fit_vessel_performance_models() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_lb">fit_vessel_performance_models_lb() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed">fit_vessel_performance_models_windowed() (in module vast.views_boss_capt.perf_data_analysis)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -217,6 +253,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ship_modelling.html#vast.views_boss_capt.awt_data_processor.get_awt_noon_data">get_awt_noon_data() (in module vast.views_boss_capt.awt_data_processor)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.get_compare_capt_data">get_compare_capt_data() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.get_foc_from_noon">get_foc_from_noon() (in module vast.views_boss_capt.perf_data_analysis)</a>
 </li>
       <li><a href="spire_position.html#vast.management.commands.spire_position.get_geo_fence_alert_types">get_geo_fence_alert_types() (in module vast.management.commands.spire_position)</a>
 </li>
@@ -228,15 +268,21 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.get_noon_data_ship_wise">get_noon_data_ship_wise() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
       <li><a href="spire_position.html#vast.management.commands.spire_position.get_plan_deviation_alert">get_plan_deviation_alert() (in module vast.management.commands.spire_position)</a>
 </li>
       <li><a href="ship_modelling.html#vast.views_weather_routing.views_ship_modelling.get_ship_modelids">get_ship_modelids() (in module vast.views_weather_routing.views_ship_modelling)</a>
 </li>
       <li><a href="route_planner.html#vast.views_weather_vizv2.routePlanner.get_simulation_results">get_simulation_results() (in module vast.views_weather_vizv2.routePlanner)</a>
 </li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.get_sister_vessel_from_ship_model">get_sister_vessel_from_ship_model() (in module vast.views_boss_capt.perf_data_analysis)</a>
+</li>
       <li><a href="spire_position.html#vast.management.commands.spire_position.get_speed_value_alert">get_speed_value_alert() (in module vast.management.commands.spire_position)</a>
 </li>
       <li><a href="weather_viz_v2.html#vast.views_weather_vizv2.main_handler.get_visualize_data_of_ship">get_visualize_data_of_ship() (in module vast.views_weather_vizv2.main_handler)</a>
+</li>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.get_voyage_abstract_data">get_voyage_abstract_data() (in module vast.views_boss_capt.perf_data_analysis)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -302,15 +348,25 @@
 </li>
       <li><a href="iva.html#module-vast.views_boss_assistant.ChatBot">vast.views_boss_assistant.ChatBot (module)</a>
 </li>
+      <li><a href="ship_modelling.html#module-vast.views_boss_capt.awt_data_processor">vast.views_boss_capt.awt_data_processor (module)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ship_modelling.html#module-vast.views_boss_capt.awt_data_processor">vast.views_boss_capt.awt_data_processor (module)</a>
+      <li><a href="performance_module.html#module-vast.views_boss_capt.perf_data_analysis">vast.views_boss_capt.perf_data_analysis (module)</a>
 </li>
       <li><a href="ship_modelling.html#module-vast.views_weather_routing.views_ship_modelling">vast.views_weather_routing.views_ship_modelling (module)</a>
 </li>
       <li><a href="weather_viz_v2.html#module-vast.views_weather_vizv2.main_handler">vast.views_weather_vizv2.main_handler (module)</a>
 </li>
       <li><a href="route_planner.html#module-vast.views_weather_vizv2.routePlanner">vast.views_weather_vizv2.routePlanner (module)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="performance_module.html#vast.views_boss_capt.perf_data_analysis.window_data">window_data() (in module vast.views_boss_capt.perf_data_analysis)</a>
 </li>
   </ul></td>
 </tr></table>

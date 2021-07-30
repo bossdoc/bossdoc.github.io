@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Route Planner" href="route_planner.html" />
-    <link rel="prev" title="SQL Configuration" href="sql_configuration.html" /> 
+    <link rel="next" title="Performance Module" href="performance_module.html" />
+    <link rel="prev" title="Logging Configuration" href="logging_configuration.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -98,11 +98,13 @@
 <li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging_configuration.html">Logging Configuration</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Docker Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-docker-image">Build Docker Image</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 </ul>
 
@@ -182,11 +184,14 @@
 </div>
 <div class="section" id="build-docker-image">
 <h2>Build Docker Image<a class="headerlink" href="#build-docker-image" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Create a directory <code class="docutils literal notranslate"><span class="pre">docker_build_files</span></code>. Add these files inside it.
-Matplotlib <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip</a>
-Basemap <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip</a>
-requirements.txt <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/requirements.txt</span></code></li>
+<ul>
+<li><div class="first line-block">
+<div class="line">Create a directory <code class="docutils literal notranslate"><span class="pre">docker_build_files</span></code>. Add these files inside it.</div>
+<div class="line">Matplotlib <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip</a></div>
+<div class="line">Basemap <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip</a></div>
+<div class="line">requirements.txt <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/requirements.txt</span></code></div>
+</div>
+</li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
 ├── bossv2
@@ -237,10 +242,10 @@ requirements.txt <code class="docutils literal notranslate"><span class="pre">va
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="route_planner.html" class="btn btn-neutral float-right" title="Route Planner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="performance_module.html" class="btn btn-neutral float-right" title="Performance Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sql_configuration.html" class="btn btn-neutral float-left" title="SQL Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="logging_configuration.html" class="btn btn-neutral float-left" title="Logging Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

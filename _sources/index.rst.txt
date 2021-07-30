@@ -25,7 +25,9 @@ Welcome to boss's documentation!
    ship_modelling
    digital_ocean
    sql_configuration
+   logging_configuration
    docker
+   performance_module
    route_planner
 
 Indices and tables

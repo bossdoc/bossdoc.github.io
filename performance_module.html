@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Performance Module &mdash; BOSS  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Route Planner" href="route_planner.html" />
+    <link rel="prev" title="Docker Guide" href="docker.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> BOSS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui_standard.html">UI Standard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_docs.html">Writing Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytest.html">PyTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulator.html">Voyage Simulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror.html">Mirror Offline HTML Form</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror.html#mirror-backend">Mirror Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_voyage.html">Post Voyage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="captn.html">Capt-N</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iva.html">IVA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo_helper.html">Geo Helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather_viz_v2.html">Weather Viz V2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging_configuration.html">Logging Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Performance Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#back-end">Back End</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BOSS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Performance Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/performance_module.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="performance-module">
+<span id="id1"></span><h1>Performance Module<a class="headerlink" href="#performance-module" title="Permalink to this headline">¶</a></h1>
+<p>Main idea for fitting – Get data as ship_wise_data from noon reports, VA or any other source.
+Filter it using relevant filtering parameters (laden, ballast, wind force etc.). Add stw, perf_speed if needed.
+Fit models.</p>
+<p>Eg.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_noon_data_ship_wise</span><span class="p">():</span>
+        <span class="n">ship_list</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Ship</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;ship_name&quot;</span><span class="p">)[:</span><span class="mi">100</span><span class="p">]</span>
+        <span class="n">ship_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ship_list</span><span class="p">)</span>
+        <span class="n">filter_param</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;wind_force&quot;</span>                    <span class="p">:</span>       <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+                <span class="s2">&quot;condition&quot;</span>                             <span class="p">:</span>       <span class="s2">&quot;All&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;speed_range&quot;</span>                   <span class="p">:</span>       <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="n">date_to</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">date_from</span> <span class="o">=</span> <span class="n">date_to</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="mi">365</span><span class="p">)</span>
+
+
+        <span class="n">st</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">ship_wise_data</span> <span class="o">=</span> <span class="n">perf_data_analysis</span><span class="o">.</span><span class="n">get_noon_data_ship_wise</span><span class="p">(</span><span class="n">ship_list</span><span class="p">,</span> <span class="n">filter_param</span><span class="p">,</span> <span class="n">date_from</span><span class="p">,</span> <span class="n">date_to</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;time to fetch data&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">st</span><span class="p">)</span>
+        <span class="n">perf_data_analysis</span><span class="o">.</span><span class="n">add_stw_and_perf_speed</span><span class="p">(</span><span class="n">ship_wise_data</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;time to add stw/perf_speed data&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">st</span><span class="p">)</span>
+        <span class="n">perf_data_analysis</span><span class="o">.</span><span class="n">fit_vessel_performance_models</span><span class="p">(</span><span class="n">ship_wise_data</span><span class="p">,</span> <span class="n">single_order_fitting</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;time to fit perf mdoels&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">st</span><span class="p">)</span>
+        <span class="n">perf_data_analysis</span><span class="o">.</span><span class="n">fit_vessel_performance_models_windowed</span><span class="p">(</span><span class="n">ship_wise_data</span><span class="p">,</span> <span class="n">windowing_type</span><span class="o">=</span><span class="s2">&quot;monthly&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;time to fit windowed perf mdoels&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">st</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="back-end">
+<h2>Back End<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>Performance Data Analysis</dt>
+<dd><span class="target" id="module-vast.views_boss_capt.perf_data_analysis"></span><dl class="first function">
+<dt id="vast.views_boss_capt.perf_data_analysis.add_sister_vessel_parameters">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">add_sister_vessel_parameters</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.add_sister_vessel_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves ship meta data from csv. (Not sure which one :P )</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.add_stw_and_perf_speed">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">add_stw_and_perf_speed</code><span class="sig-paren">(</span><em>ship_wise_data</em>, <em>calc_stw=True</em>, <em>calc_perf_speed=True</em>, <em>weather_type='reported'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.add_stw_and_perf_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds stw and perf_speed keys in the noon reports in ship_wise_data</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.convert_fitted_models_to_ship_model_constants">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">convert_fitted_models_to_ship_model_constants</code><span class="sig-paren">(</span><em>fitted_models</em>, <em>weather_factors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.convert_fitted_models_to_ship_model_constants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes as input output of fit_vessel_models</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.filter_ship_wise_data">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">filter_ship_wise_data</code><span class="sig-paren">(</span><em>ship_wise_data</em>, <em>filter_params</em>, <em>speed_key='actual_speed'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.filter_ship_wise_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters ship_wise_data according to the criterea in filter_params
+ship_wise_data : {</p>
+<blockquote>
+<div>ship_id : [list of dicts, each dict is a noon]</div></blockquote>
+<p>}
+check code for filter_params structure.
+speed_key, speed_key used for filtering speed range.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.find_model_accuracy">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">find_model_accuracy</code><span class="sig-paren">(</span><em>noon_list</em>, <em>fitted_models</em>, <em>speed_key='perf_speed'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.find_model_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>fitted_models data structure is the same as what is returned by convert_ship_model_to_fitted_model.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.find_sister_vessels">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">find_sister_vessels</code><span class="sig-paren">(</span><em>request</em>, <em>top_k=5</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.find_sister_vessels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds top_k closest matches to a given ship.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.fit_model_on_data">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_model_on_data</code><span class="sig-paren">(</span><em>x_data</em>, <em>y_data</em>, <em>order</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_model_on_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>No longer used i think.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.fit_model_on_data_v2">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_model_on_data_v2</code><span class="sig-paren">(</span><em>x_data</em>, <em>y_data</em>, <em>order_min</em>, <em>order_max</em>, <em>max_intercept=50.0</em>, <em>fit_intercept=True</em>, <em>order_delta=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_model_on_data_v2" title="Permalink to this definition">¶</a></dt>
+<dd><p>fits model of the form: y = a*x^order + c</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models</code><span class="sig-paren">(</span><em>ship_wise_data, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', single_order_fitting=True, fit_intercept=False, ship_data_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to call to fit ship models.
+Returns something like:
+all_models_and_data[ship_id] =</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>‘rpm_foc’ <span class="classifier-delimiter">:</span> <span class="classifier">{</span></dt>
+<dd><p class="first">‘fitted_model’ : fitted_model,
+‘data’ : {</p>
+<blockquote>
+<div>‘x_data’ :  x_data,
+‘y_data’ : y_data,
+‘meta_data’ : meta_data,</div></blockquote>
+<p class="last">},
+‘average_ae’: average_ae,
+‘average_load_disp’ : average_load_disp</p>
+</dd>
+</dl>
+<p>},
+.. other models.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_lb">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models_lb</code><span class="sig-paren">(</span><em>ship_wise_data, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_lb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seggregates ship_wise_data into laden ballast, fits the two models,
+aggregates the results.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models_windowed</code><span class="sig-paren">(</span><em>ship_wise_data, windowing_type, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', single_order_fitting=True, fit_intercept=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>For performance trending. Similar return structure as fit_vessel_performance_models,
+but also has information about windows.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.get_compare_capt_data">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_compare_capt_data</code><span class="sig-paren">(</span><em>ship_list=None</em>, <em>filter_param=None</em>, <em>start_date=None</em>, <em>end_date=None</em>, <em>ship_dry_dock_dates=None</em>, <em>use_speed_range=False</em>, <em>fetch_proj=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_compare_capt_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>ship_list : List of ship objects
+filter_param : {</p>
+<blockquote>
+<div>“wind_force”                    :       [min,max],
+“condition”                             :       # All, laden, ballast
+“speed_range”                   :       [min, max]</div></blockquote>
+<p>}
+use_speed_range : Set true to use the speed range supplied in filter param
+set fetch_proj true to also fetch projected weather in noon reports.
+ship_drydock_dates is like :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>ship_dates[ship.id] = {</dt>
+<dd>“start_date”:date_from,
+“end_date”:date_to,
+“start_date_second”:None,
+“end_date_second”:None</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>if start_date_second, end_date_second is None only primary data is relevant.
+In practice, dont specify most filters in this function. Instead get all data, and use the filter_ship_wise_data
+function to filter data.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.get_foc_from_noon">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_foc_from_noon</code><span class="sig-paren">(</span><em>noon</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_foc_from_noon" title="Permalink to this definition">¶</a></dt>
+<dd><p>computes ME, AE, and total consumption of a record. If ‘foc’ key already present,
+does not do gradewise computation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.get_noon_data_ship_wise">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_noon_data_ship_wise</code><span class="sig-paren">(</span><em>ship_list</em>, <em>filter_params</em>, <em>date_from</em>, <em>date_to</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_noon_data_ship_wise" title="Permalink to this definition">¶</a></dt>
+<dd><p>ALWAYS use this function to get noon data for ships.
+ship_list : list of instances of models.Ship
+only relevant filter_params
+filter_params = {</p>
+<blockquote>
+<div>“wind_force”                    :       [min_wind_force,max_wind_force],
+“condition”                             :       “All”,</div></blockquote>
+<p>}
+Use filter_ship_wise_data for more filtering.
+returns ship_wise_data :
+ship_wise_data : {</p>
+<blockquote>
+<div>ship_id : [list of dicts, each dict is a noon]</div></blockquote>
+<p>}</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.get_sister_vessel_from_ship_model">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_sister_vessel_from_ship_model</code><span class="sig-paren">(</span><em>vessel</em>, <em>feature_weightage</em>, <em>length_delta=5</em>, <em>draft_delta=2</em>, <em>ncr_delta=2</em>, <em>ncr_power_delta=3</em>, <em>mcr_delta=2</em>, <em>mcr_power_delta=3</em>, <em>tpc_delta=5</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_sister_vessel_from_ship_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes match scores of all vessels
+in DB to the given vessel.
+Returns {</p>
+<blockquote>
+<div>ship_name : [ship, score]</div></blockquote>
+<p>}
+TODO change returned object structure
+vessel : instance of models.Ship
+feature_weightage : score added to the match score if the given feature is within
+delta</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.views_boss_capt.perf_data_analysis.get_voyage_abstract_data">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_voyage_abstract_data</code><span class="sig-paren">(</span><em>ship_list</em>, <em>date_from=None</em>, <em>date_to=None</em>, <em>max_bft=5.0</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_voyage_abstract_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this function as a template to know what fields are required to do performance analysis
+and curve fittting.
+Datastructure similar to that returned by get_noon_data_ship_wise but fewer fields.
+enough for curve fitting.</p>
+</dd></dl>
+
+<dl class="last function">
+<dt id="vast.views_boss_capt.perf_data_analysis.window_data">
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">window_data</code><span class="sig-paren">(</span><em>ship_wise_data</em>, <em>windowing_type</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.window_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>windowing_type : can be monthly, quarterly, yearly
+adds windowed data to ship_wise_data
+monthly:
+ship_wise_data[ship][‘windowed_data’] = {</p>
+<blockquote>
+<div>‘2020_m_1’ : # jan 2020,
+‘2020_m_2’ : # feb 2020,</div></blockquote>
+<p>}
+or quarterly
+ship_wise_data[ship][‘windowed_data’] = {</p>
+<blockquote>
+<div>‘2020_q_1’ : # Q1 2020,
+‘2020_q_2’ : # Q2 2020,</div></blockquote>
+<p>}
+or yearly
+ship_wise_data[ship][‘windowed_data’] = {</p>
+<blockquote>
+<div>‘y_2020’ : # 2020,
+‘y_2021’ : # 2021,</div></blockquote>
+<p>}</p>
+</dd></dl>
+
+</dd>
+</dl>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="route_planner.html" class="btn btn-neutral float-right" title="Route Planner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="docker.html" class="btn btn-neutral float-left" title="Docker Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Blue Water Trade Winds pvt ltd
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

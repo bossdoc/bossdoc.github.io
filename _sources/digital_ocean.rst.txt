@@ -7,7 +7,7 @@ Digital Ocean Configuration
 * Apache config: ``vw/digital_ocean/bossv2-apache.conf``
 * Matplotlib https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip
 * Basemap https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip
-
+* Eccodes https://confluence.ecmwf.int/download/attachments/45757960/eccodes-2.22.1-Source.tar.gz?api=v2
 
 Installation
 ------------
@@ -50,7 +50,7 @@ Apache Configuration
     
 * Restart apache service
     
-  .. code-block:: bash
+.. code-block:: bash
   
 	sudo systemctl reload apache2
 	sudo service apache2 restart
@@ -98,4 +98,79 @@ Cron Jobs
 
 Use ``vast/digital_ocean/Cron``. Change paths, username, database, password according to your Configuration requirement
 
+* Run 'pip install -e git+https://github.com/paarthneekhara/django-auth-adfs@cbedadcb500b08e4e37ad7377e97d67b5e72fbb0#egg=django_auth_adfs'
+
 Note: Delete cron config using ``crontab -r``
+
+
+NFS (Share Volumes)
+-------------------
+Host IP Address: 10.100.1.host
+CLient IP Address: 10.100.2.client
+
+* Host
+
+.. code-block:: bash
+
+    sudo apt install nfs-kernel-server
+	
+
+Add this in '/etc/exports':	
+
+.. code-block:: bash
+	
+	/home/bossbwtw             10.100.2.client(rw,sync,no_root_squash,no_subtree_check)
+
+.. code-block:: bash
+	
+	exportfs -a
+	ufw enable
+	ufw allow from 10.100.2.client to any port nfs
+	systemctl restart nfs-kernel-server
+
+* Client
+
+.. code-block:: bash
+
+	sudo apt install nfs-common
+	mkdir -p /home/bossbwtw
+	mount 10.100.1.host:/home/bossbwtw /home/bossbwtw 
+	nano /etc/fstab
+	
+Add this in '/etc/fstab'(For automounting):	
+	
+.. code-block:: bash
+
+	10.100.1.host:/home/bossbwtw       /home/bossbwtw      nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
+
+
+Apache Log rotate
+-----------------
+* Update '/etc/logrotate.d/apache2':
+
+.. code-block:: bash
+
+	/home/bossbwtw/bossv2/Logs/*.log {
+		daily
+		dateext
+		maxage 30
+		missingok
+		rotate 14
+		compress
+		delaycompress
+		notifempty
+		create 640 root adm
+		sharedscripts
+		postrotate
+					if invoke-rc.d apache2 status > /dev/null 2>&1; then \
+						invoke-rc.d apache2 reload > /dev/null 2>&1; \
+					fi;
+		endscript
+		prerotate
+			if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+				run-parts /etc/logrotate.d/httpd-prerotate; \
+			fi; \
+		endscript
+	}
+
+

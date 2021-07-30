@@ -100,10 +100,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#apache-configuration">Apache Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cron-jobs">Cron Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nfs-share-volumes">NFS (Share Volumes)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#apache-log-rotate">Apache Log rotate</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging_configuration.html">Logging Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 </ul>
 
@@ -176,6 +180,7 @@
 <li>Apache config: <code class="docutils literal notranslate"><span class="pre">vw/digital_ocean/bossv2-apache.conf</span></code></li>
 <li>Matplotlib <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip</a></li>
 <li>Basemap <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip</a></li>
+<li>Eccodes <a class="reference external" href="https://confluence.ecmwf.int/download/attachments/45757960/eccodes-2.22.1-Source.tar.gz?api=v2">https://confluence.ecmwf.int/download/attachments/45757960/eccodes-2.22.1-Source.tar.gz?api=v2</a></li>
 </ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -206,14 +211,13 @@ Note: You will have to update the path inside the apache conf according to your 
     sudo ufw allow <span class="m">800</span>
 </pre></div>
 </div>
-<ul>
-<li><p class="first">Restart apache service</p>
+<ul class="simple">
+<li>Restart apache service</li>
+</ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl reload apache2
 sudo service apache2 restart
 </pre></div>
 </div>
-</li>
-</ul>
 <p>Note: Give Permissions to your directories according to your directory tree structure. It should look something like this.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
 ├── bossv2
@@ -252,7 +256,74 @@ sudo service apache2 restart
 </pre></div>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/Cron</span></code>. Change paths, username, database, password according to your Configuration requirement</p>
+<ul class="simple">
+<li>Run ‘pip install -e git+https://github.com/paarthneekhara/django-auth-adfs&#64;cbedadcb500b08e4e37ad7377e97d67b5e72fbb0#egg=django_auth_adfs’</li>
+</ul>
 <p>Note: Delete cron config using <code class="docutils literal notranslate"><span class="pre">crontab</span> <span class="pre">-r</span></code></p>
+</div>
+<div class="section" id="nfs-share-volumes">
+<h2>NFS (Share Volumes)<a class="headerlink" href="#nfs-share-volumes" title="Permalink to this headline">¶</a></h2>
+<p>Host IP Address: 10.100.1.host
+CLient IP Address: 10.100.2.client</p>
+<ul class="simple">
+<li>Host</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install nfs-kernel-server
+</pre></div>
+</div>
+<p>Add this in ‘/etc/exports’:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/bossbwtw             <span class="m">10</span>.100.2.client<span class="o">(</span>rw,sync,no_root_squash,no_subtree_check<span class="o">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>exportfs -a
+ufw <span class="nb">enable</span>
+ufw allow from <span class="m">10</span>.100.2.client to any port nfs
+systemctl restart nfs-kernel-server
+</pre></div>
+</div>
+<ul class="simple">
+<li>Client</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install nfs-common
+mkdir -p /home/bossbwtw
+mount <span class="m">10</span>.100.1.host:/home/bossbwtw /home/bossbwtw
+nano /etc/fstab
+</pre></div>
+</div>
+<p>Add this in ‘/etc/fstab’(For automounting):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">10</span>.100.1.host:/home/bossbwtw       /home/bossbwtw      nfs auto,nofail,noatime,nolock,intr,tcp,actimeo<span class="o">=</span><span class="m">1800</span> <span class="m">0</span> <span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="apache-log-rotate">
+<h2>Apache Log rotate<a class="headerlink" href="#apache-log-rotate" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Update ‘/etc/logrotate.d/apache2’:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/bossbwtw/bossv2/Logs/*.log <span class="o">{</span>
+        daily
+        dateext
+        maxage <span class="m">30</span>
+        missingok
+        rotate <span class="m">14</span>
+        compress
+        delaycompress
+        notifempty
+        create <span class="m">640</span> root adm
+        sharedscripts
+        postrotate
+                                <span class="k">if</span> invoke-rc.d apache2 status &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span> <span class="k">then</span> <span class="se">\</span>
+                                        invoke-rc.d apache2 reload &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span> <span class="se">\</span>
+                                <span class="k">fi</span><span class="p">;</span>
+        endscript
+        prerotate
+                <span class="k">if</span> <span class="o">[</span> -d /etc/logrotate.d/httpd-prerotate <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="se">\</span>
+                        run-parts /etc/logrotate.d/httpd-prerotate<span class="p">;</span> <span class="se">\</span>
+                <span class="k">fi</span><span class="p">;</span> <span class="se">\</span>
+        endscript
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 

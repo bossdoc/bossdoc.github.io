@@ -15,10 +15,10 @@ Install Docker using https://docs.docker.com/engine/install/
 
 Build Docker Image
 ------------------
-* Create a directory ``docker_build_files``. Add these files inside it.
-  Matplotlib https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip
-  Basemap https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip
-  requirements.txt ``vast/digital_ocean/requirements.txt``
+* | Create a directory ``docker_build_files``. Add these files inside it.
+  | Matplotlib https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip
+  | Basemap https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip
+  | requirements.txt ``vast/digital_ocean/requirements.txt``
 
 .. code-block:: bash
     
