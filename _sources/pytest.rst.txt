@@ -69,7 +69,7 @@ A sample test is given below. Use the dectorator ``@pytest.mark.django_db`` if y
 		# login
 		c.post(u'/vast/user_login', 
 			{'username': json.dumps('paarth_admin'), 
-			'password': json.dumps('Paarth22')}
+			'password': json.dumps('YOUR PASSWORD')}
 		)
 		
 		r = c.get(u'/vast/ok_iva/', 
