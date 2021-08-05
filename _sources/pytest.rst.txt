@@ -6,22 +6,20 @@ PyTest
 Installation
 ------------
 
-Install the following using pip::
+1. Install the following using pip::
 	
 	pytest==4.6.5
 	pytest-django==3.5.1
 
-Create a file ``pytest.ini`` in the BOSS directory outside vast with the following content::
+2. Create a file ``pytest.ini`` in the BOSS directory outside vast with the following content::
 	
 	[pytest]
 	DJANGO_SETTINGS_MODULE = Virtual_Arrival.settings
 
 Docs: https://docs.pytest.org/en/latest/contents.html
 
-Configure with existing database
---------------------------------
 
-Create a file ``conftest.py`` in the BOSS directory outside vast with the following content:
+3. Create a file ``conftest.py`` in the BOSS directory outside vast with the following content:
 
 .. code-block:: python
 	
@@ -30,14 +28,7 @@ Create a file ``conftest.py`` in the BOSS directory outside vast with the follow
 
 	@pytest.fixture(scope='session')
 	def django_db_setup():
-	    settings.DATABASES['default'] = {
-	        'ENGINE': 'django.db.backends.mysql',
-	        'NAME': 'vwr',
-	        'USER': 'root',
-	        'PASSWORD': 'PASSWORD',
-	        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
-	        'PORT': '3306',
-	    }
+	    pass
 
 
 

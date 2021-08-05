@@ -86,7 +86,6 @@
 <li class="toctree-l1"><a class="reference internal" href="writing_docs.html">Writing Docs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">PyTest</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configure-with-existing-database">Configure with existing database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running-a-test">Running a Test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-a-test">Writing a Test</a></li>
 </ul>
@@ -176,34 +175,30 @@
 <span id="id1"></span><h1>PyTest<a class="headerlink" href="#pytest" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Install the following using pip:</p>
+<ol class="arabic">
+<li><p class="first">Install the following using pip:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span><span class="o">==</span><span class="mf">4.6</span><span class="o">.</span><span class="mi">5</span>
 <span class="n">pytest</span><span class="o">-</span><span class="n">django</span><span class="o">==</span><span class="mf">3.5</span><span class="o">.</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p>Create a file <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code> in the BOSS directory outside vast with the following content:</p>
+</li>
+<li><p class="first">Create a file <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code> in the BOSS directory outside vast with the following content:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pytest</span><span class="p">]</span>
 <span class="n">DJANGO_SETTINGS_MODULE</span> <span class="o">=</span> <span class="n">Virtual_Arrival</span><span class="o">.</span><span class="n">settings</span>
 </pre></div>
 </div>
+</li>
+</ol>
 <p>Docs: <a class="reference external" href="https://docs.pytest.org/en/latest/contents.html">https://docs.pytest.org/en/latest/contents.html</a></p>
-</div>
-<div class="section" id="configure-with-existing-database">
-<h2>Configure with existing database<a class="headerlink" href="#configure-with-existing-database" title="Permalink to this headline">¶</a></h2>
-<p>Create a file <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> in the BOSS directory outside vast with the following content:</p>
+<ol class="arabic simple" start="3">
+<li>Create a file <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> in the BOSS directory outside vast with the following content:</li>
+</ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 
 <span class="nd">@pytest.fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;session&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">django_db_setup</span><span class="p">():</span>
-    <span class="n">settings</span><span class="o">.</span><span class="n">DATABASES</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.mysql&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;vwr&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;PASSWORD&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>   <span class="c1"># Or an IP Address that your DB is hosted on</span>
-        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;3306&#39;</span><span class="p">,</span>
-    <span class="p">}</span>
+    <span class="k">pass</span>
 </pre></div>
 </div>
 </div>
