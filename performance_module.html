@@ -105,6 +105,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot.html">Vessel Copilot</a></li>
 </ul>
 
             
@@ -259,7 +260,7 @@ speed_key, speed_key used for filtering speed range.</p>
 
 <dl class="function">
 <dt id="vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models">
-<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models</code><span class="sig-paren">(</span><em>ship_wise_data, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', single_order_fitting=True, fit_intercept=False, ship_data_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models</code><span class="sig-paren">(</span><em>ship_wise_data, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', normalize_by_disp=False, single_order_fitting=False, fit_intercept=False, ship_data_type=None, sensor_data=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main function to call to fit ship models.
 Returns something like:
 all_models_and_data[ship_id] =</p>
@@ -291,7 +292,7 @@ aggregates the results.</p>
 
 <dl class="function">
 <dt id="vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed">
-<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models_windowed</code><span class="sig-paren">(</span><em>ship_wise_data, windowing_type, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', single_order_fitting=True, fit_intercept=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models_windowed</code><span class="sig-paren">(</span><em>ship_wise_data, windowing_type, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', single_order_fitting=False, fit_intercept=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed" title="Permalink to this definition">¶</a></dt>
 <dd><p>For performance trending. Similar return structure as fit_vessel_performance_models,
 but also has information about windows.</p>
 </dd></dl>
@@ -352,7 +353,7 @@ ship_wise_data : {</p>
 
 <dl class="function">
 <dt id="vast.views_boss_capt.perf_data_analysis.get_sister_vessel_from_ship_model">
-<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_sister_vessel_from_ship_model</code><span class="sig-paren">(</span><em>vessel</em>, <em>feature_weightage</em>, <em>length_delta=5</em>, <em>draft_delta=2</em>, <em>ncr_delta=2</em>, <em>ncr_power_delta=3</em>, <em>mcr_delta=2</em>, <em>mcr_power_delta=3</em>, <em>tpc_delta=5</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_sister_vessel_from_ship_model" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_sister_vessel_from_ship_model</code><span class="sig-paren">(</span><em>ships, vessel, length_delta=[1, 5], draft_delta=[0.5, 2], mcr_delta=[0.2, 2], mcr_power_delta=[1, 5], tpc_delta=[1, 5]</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_sister_vessel_from_ship_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes match scores of all vessels
 in DB to the given vessel.
 Returns {</p>

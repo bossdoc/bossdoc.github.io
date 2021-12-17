@@ -37,15 +37,19 @@ Running a Test
 
 Run a single test file using the following command::
 	
-	pytest vast/views_boss_assistant/test_chatbot.py 
+	pytest vast/tests/tests_qaira/test_chatbot.py 
 
 To print the output during the execution use the ``-s`` option::
 	
-	pytest vast/views_boss_assistant/test_chatbot.py -s
+	pytest vast/tests/tests_qaira/test_chatbot.py -s
 
-To test all tests in a module (all files thast start with test\_ or end with test.py (I think so! ) )::
+To test all tests in a module (all files that start with test\_ or end with test.py (I think so! ) )::
 	
-	pytest vast/views_boss_assistant/
+	pytest vast/tests/tests_weather_vizv2
+
+To test one function in a module (Specifying py file is optional, pytest finds the function on its own) ::
+	
+	pytest vast/tests/tests_qaira/test_chatbot.py -k test_chat_bot
 
 Writing a Test
 --------------
@@ -78,5 +82,64 @@ A sample test is given below. Use the dectorator ``@pytest.mark.django_db`` if y
 
 		assert r.status_code == 200
 		assert 'data' in json.loads(r.content)
+
+Here is another way of using django requests and authenticating users for testing views.
+
+.. code-block:: python
+	
+	from django.test import RequestFactory
+	import pprint
+	from vast.common import common_fun as cf
+	from vast.views_weather_routing import views_weather_visualization as vwv
+	import json
+	from datetime import datetime
+	import numpy
+	from django.db.models.query import QuerySet
+	import pytest
+	from django.contrib.auth.models import AnonymousUser
+
+	@pytest.mark.django_db
+	def test_optimize_tab():
+		request_factory = RequestFactory()
+
+		ship_list = [ s for s in models.Ship.objects.all().order_by("ship_name")][:NUM_SHIPS_TEST]
+
+		position_details = vwv.visualise_vessel_positions_new(ship_list)
+		position_details_dict = {row['ship_id']: row for row in position_details}
+		# print("position_details", position_details_dict.keys())
+		for ship in ship_list:
+			print('Running tests for ship id {}'.format(ship.id))
+			last_voyage = cf.get_last_voyage_of_ship_fastest_method([ship.id])
+			if ship.id not in position_details_dict:
+				print("Skipping ship because not in position dict",
+					ship.id, ship.ship_name)
+				continue
+			ship_position_details = position_details_dict[ship.id]
+			curr_pos = ship_position_details['dr_position']
+			pos_date = ship_position_details['date_time']
+
+			# print ship, curr_pos, pos_date, type(pos_date), type(curr_pos)
+			print(last_voyage)
+			if isinstance(last_voyage, dict) and ship in last_voyage:
+				voyage = last_voyage[ship]
+
+			else:
+				print("Skipping", ship.ship_name)
+				continue
+
+			request = request_factory.get('/vw/get_visualize_data_of_ship', {
+				'ship_id': ship.id,
+				'voyage_id': voyage.id,
+				'pos_date': pos_date,
+				'curr_pos': json.dumps(curr_pos),
+				'type': 'optimize'
+			})
+			request.user = AnonymousUser()
+			request.user.is_authenticated = lambda: True
+			
+			context, _ = optimize.optimization_tab(request)
+			check_type_and_existence(context, ['ae_cons_per_day'],[float])
+			check_type_and_existence(context, ['me_non_seca_cost','ae_non_seca_cost','daily_hire_rate','me_seca_cost','ae_seca_cost'],[float, None])
+			check_type_and_existence(context, ['eop_details_json','recommended_route_data'],[str])
 	
 

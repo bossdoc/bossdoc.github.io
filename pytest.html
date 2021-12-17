@@ -107,6 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot.html">Vessel Copilot</a></li>
 </ul>
 
             
@@ -205,15 +206,19 @@
 <div class="section" id="running-a-test">
 <h2>Running a Test<a class="headerlink" href="#running-a-test" title="Permalink to this headline">¶</a></h2>
 <p>Run a single test file using the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">vast</span><span class="o">/</span><span class="n">views_boss_assistant</span><span class="o">/</span><span class="n">test_chatbot</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">vast</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">tests_qaira</span><span class="o">/</span><span class="n">test_chatbot</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>To print the output during the execution use the <code class="docutils literal notranslate"><span class="pre">-s</span></code> option:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">vast</span><span class="o">/</span><span class="n">views_boss_assistant</span><span class="o">/</span><span class="n">test_chatbot</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">s</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">vast</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">tests_qaira</span><span class="o">/</span><span class="n">test_chatbot</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">s</span>
 </pre></div>
 </div>
-<p>To test all tests in a module (all files thast start with test_ or end with test.py (I think so! ) ):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">vast</span><span class="o">/</span><span class="n">views_boss_assistant</span><span class="o">/</span>
+<p>To test all tests in a module (all files that start with test_ or end with test.py (I think so! ) ):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">vast</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">tests_weather_vizv2</span>
+</pre></div>
+</div>
+<p>To test one function in a module (Specifying py file is optional, pytest finds the function on its own)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">vast</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">tests_qaira</span><span class="o">/</span><span class="n">test_chatbot</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">k</span> <span class="n">test_chat_bot</span>
 </pre></div>
 </div>
 </div>
@@ -244,6 +249,63 @@
 
         <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
         <span class="k">assert</span> <span class="s1">&#39;data&#39;</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here is another way of using django requests and authenticating users for testing views.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">RequestFactory</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">from</span> <span class="nn">vast.common</span> <span class="kn">import</span> <span class="n">common_fun</span> <span class="k">as</span> <span class="n">cf</span>
+<span class="kn">from</span> <span class="nn">vast.views_weather_routing</span> <span class="kn">import</span> <span class="n">views_weather_visualization</span> <span class="k">as</span> <span class="n">vwv</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">django.db.models.query</span> <span class="kn">import</span> <span class="n">QuerySet</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">AnonymousUser</span>
+
+<span class="nd">@pytest.mark.django_db</span>
+<span class="k">def</span> <span class="nf">test_optimize_tab</span><span class="p">():</span>
+        <span class="n">request_factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span>
+
+        <span class="n">ship_list</span> <span class="o">=</span> <span class="p">[</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">Ship</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;ship_name&quot;</span><span class="p">)][:</span><span class="n">NUM_SHIPS_TEST</span><span class="p">]</span>
+
+        <span class="n">position_details</span> <span class="o">=</span> <span class="n">vwv</span><span class="o">.</span><span class="n">visualise_vessel_positions_new</span><span class="p">(</span><span class="n">ship_list</span><span class="p">)</span>
+        <span class="n">position_details_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;ship_id&#39;</span><span class="p">]:</span> <span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">position_details</span><span class="p">}</span>
+        <span class="c1"># print(&quot;position_details&quot;, position_details_dict.keys())</span>
+        <span class="k">for</span> <span class="n">ship</span> <span class="ow">in</span> <span class="n">ship_list</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Running tests for ship id {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ship</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="n">last_voyage</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">get_last_voyage_of_ship_fastest_method</span><span class="p">([</span><span class="n">ship</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">ship</span><span class="o">.</span><span class="n">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">position_details_dict</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Skipping ship because not in position dict&quot;</span><span class="p">,</span>
+                                <span class="n">ship</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ship</span><span class="o">.</span><span class="n">ship_name</span><span class="p">)</span>
+                        <span class="k">continue</span>
+                <span class="n">ship_position_details</span> <span class="o">=</span> <span class="n">position_details_dict</span><span class="p">[</span><span class="n">ship</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+                <span class="n">curr_pos</span> <span class="o">=</span> <span class="n">ship_position_details</span><span class="p">[</span><span class="s1">&#39;dr_position&#39;</span><span class="p">]</span>
+                <span class="n">pos_date</span> <span class="o">=</span> <span class="n">ship_position_details</span><span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">]</span>
+
+                <span class="c1"># print ship, curr_pos, pos_date, type(pos_date), type(curr_pos)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">last_voyage</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">last_voyage</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">ship</span> <span class="ow">in</span> <span class="n">last_voyage</span><span class="p">:</span>
+                        <span class="n">voyage</span> <span class="o">=</span> <span class="n">last_voyage</span><span class="p">[</span><span class="n">ship</span><span class="p">]</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Skipping&quot;</span><span class="p">,</span> <span class="n">ship</span><span class="o">.</span><span class="n">ship_name</span><span class="p">)</span>
+                        <span class="k">continue</span>
+
+                <span class="n">request</span> <span class="o">=</span> <span class="n">request_factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/vw/get_visualize_data_of_ship&#39;</span><span class="p">,</span> <span class="p">{</span>
+                        <span class="s1">&#39;ship_id&#39;</span><span class="p">:</span> <span class="n">ship</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                        <span class="s1">&#39;voyage_id&#39;</span><span class="p">:</span> <span class="n">voyage</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                        <span class="s1">&#39;pos_date&#39;</span><span class="p">:</span> <span class="n">pos_date</span><span class="p">,</span>
+                        <span class="s1">&#39;curr_pos&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">curr_pos</span><span class="p">),</span>
+                        <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;optimize&#39;</span>
+                <span class="p">})</span>
+                <span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">AnonymousUser</span><span class="p">()</span>
+                <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">True</span>
+
+                <span class="n">context</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">optimization_tab</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+                <span class="n">check_type_and_existence</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ae_cons_per_day&#39;</span><span class="p">],[</span><span class="nb">float</span><span class="p">])</span>
+                <span class="n">check_type_and_existence</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;me_non_seca_cost&#39;</span><span class="p">,</span><span class="s1">&#39;ae_non_seca_cost&#39;</span><span class="p">,</span><span class="s1">&#39;daily_hire_rate&#39;</span><span class="p">,</span><span class="s1">&#39;me_seca_cost&#39;</span><span class="p">,</span><span class="s1">&#39;ae_seca_cost&#39;</span><span class="p">],[</span><span class="nb">float</span><span class="p">,</span> <span class="bp">None</span><span class="p">])</span>
+                <span class="n">check_type_and_existence</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;eop_details_json&#39;</span><span class="p">,</span><span class="s1">&#39;recommended_route_data&#39;</span><span class="p">],[</span><span class="nb">str</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>

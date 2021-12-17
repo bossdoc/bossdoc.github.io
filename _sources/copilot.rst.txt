@@ -1,0 +1,40 @@
+.. _copilot:
+
+Vessel Copilot
+==============
+
+Main Files
+----------
+
+The main code files can be found in ``apps/vessel_copilot``. Entry point for the backend should be ``copilot.py``. 
+You can test it using ``tests/tests_copilot.py`` by running ``pytest vast/tests/tests_copilot -s``.
+
+Views are defined in ``apps/vessel_copilot/views_copilot.py``. 
+Templates are in ``templates/vessel_copilot``.
+Urls in ``urls_vessel_copilot.py``
+
+Architecture
+------------
+
+Architecturally, we create instance of ``VesselCopilot`` (in ``copilot.py``) for a particular ship. 
+This instantiates several bots that are tasked with analysing different aspects of the vessel - specs, dsr, mirror etc. 
+Each bot has an analyze function that returns a list of actions (instances of ``action_template.CopilotAction class``). 
+These actions have an action_model attribute which is an object of ``models.copilot_actions``. 
+The analyze function does not make any changes to the database. 
+We'll call VesselCopilot.save_actions to save the actions in the database.
+
+The table ``models.copilot_actions`` stores one action_name per ship (Does not store the whole history). 
+So if we have 500 ships and say a total of 50 action_names, we can have max 500X50 entries in this table.
+Anytime anayze function is called, it checks the last saved action for this action_name and ship. 
+If a saved action is found, the saved action is updated and returned in the list of actions. 
+The table ``models.copilot_emails`` maintains a history of email communication about the given action. 
+This can be used in certain analysis functions and is also displayed on the UI.
+
+.. automodule:: vast.apps.vessel_copilot.copilot
+	:members:
+
+.. automodule:: vast.apps.vessel_copilot.action_template
+	:members:
+
+.. automodule:: vast.apps.vessel_copilot.auto_solver
+	:members:

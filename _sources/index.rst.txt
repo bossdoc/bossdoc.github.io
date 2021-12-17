@@ -29,6 +29,7 @@ Welcome to boss's documentation!
    docker
    performance_module
    route_planner
+   copilot
 
 Indices and tables
 ==================
