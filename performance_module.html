@@ -260,7 +260,7 @@ speed_key, speed_key used for filtering speed range.</p>
 
 <dl class="function">
 <dt id="vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models">
-<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models</code><span class="sig-paren">(</span><em>ship_wise_data, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', normalize_by_disp=False, single_order_fitting=False, fit_intercept=False, ship_data_type=None, sensor_data=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models</code><span class="sig-paren">(</span><em>ship_wise_data, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', normalize_by_disp=False, single_order_fitting=False, fit_intercept=False, ship_data_type=None, sensor_data=False, only_data=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main function to call to fit ship models.
 Returns something like:
 all_models_and_data[ship_id] =</p>
@@ -285,7 +285,7 @@ all_models_and_data[ship_id] =</p>
 
 <dl class="function">
 <dt id="vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_lb">
-<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models_lb</code><span class="sig-paren">(</span><em>ship_wise_data, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_lb" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models_lb</code><span class="sig-paren">(</span><em>ship_wise_data, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', only_data=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_lb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Seggregates ship_wise_data into laden ballast, fits the two models,
 aggregates the results.</p>
 </dd></dl>

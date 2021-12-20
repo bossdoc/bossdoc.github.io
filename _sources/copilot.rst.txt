@@ -30,6 +30,17 @@ If a saved action is found, the saved action is updated and returned in the list
 The table ``models.copilot_emails`` maintains a history of email communication about the given action. 
 This can be used in certain analysis functions and is also displayed on the UI.
 
+.. warning::
+   The analyze function (and subfunctions) always returns an action of the given action_type 
+   (unless the action never existed in the db and the problem is still not present). 
+   If the action is already present in the database and the problem is now resolved (not present), 
+   the analyze function returns the saved action with status marked as resolved and not an empty list.
+   We ensure this by always creating an action, regardless of whether the problem exists or not 
+   with an empty problem description. Then if the problem is present, we update the problem description.
+   Finally we call ``action_template.get_action_basis_saved_action`` which handles whether to 
+   update and return the saved action, create a new action or return None if an action does not exist 
+   in DB and is no longer needed.
+
 .. automodule:: vast.apps.vessel_copilot.copilot
 	:members:
 

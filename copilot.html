@@ -194,6 +194,18 @@ Anytime anayze function is called, it checks the last saved action for this acti
 If a saved action is found, the saved action is updated and returned in the list of actions.
 The table <code class="docutils literal notranslate"><span class="pre">models.copilot_emails</span></code> maintains a history of email communication about the given action.
 This can be used in certain analysis functions and is also displayed on the UI.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The analyze function (and subfunctions) always returns an action of the given action_type
+(unless the action never existed in the db and the problem is still not present).
+If the action is already present in the database and the problem is now resolved (not present),
+the analyze function returns the saved action with status marked as resolved and not an empty list.
+We ensure this by always creating an action, regardless of whether the problem exists or not
+with an empty problem description. Then if the problem is present, we update the problem description.
+Finally we call <code class="docutils literal notranslate"><span class="pre">action_template.get_action_basis_saved_action</span></code> which handles whether to
+update and return the saved action, create a new action or return None if an action does not exist
+in DB and is no longer needed.</p>
+</div>
 <span class="target" id="module-vast.apps.vessel_copilot.copilot"></span><dl class="class">
 <dt id="vast.apps.vessel_copilot.copilot.VesselCopilot">
 <em class="property">class </em><code class="descclassname">vast.apps.vessel_copilot.copilot.</code><code class="descname">VesselCopilot</code><span class="sig-paren">(</span><em>ship</em>, <em>analyze_mode=True</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.copilot.VesselCopilot" title="Permalink to this definition">¶</a></dt>
