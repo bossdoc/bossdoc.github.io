@@ -221,37 +221,37 @@ in DB and is no longer needed.</p>
 <p>Example code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_analyze_missing_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-<span class="n">action_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">action_name</span> <span class="o">=</span> <span class="s2">&quot;missing_attributes&quot;</span>
-<span class="n">action_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">copilot_actions</span><span class="p">()</span>
-<span class="n">action_model</span><span class="o">.</span><span class="n">ship</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ship</span>
-<span class="n">action_model</span><span class="o">.</span><span class="n">action_name</span> <span class="o">=</span> <span class="n">action_name</span>
-<span class="n">action_model</span><span class="o">.</span><span class="n">action_category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span>
-<span class="n">action_model</span><span class="o">.</span><span class="n">problem_title</span> <span class="o">=</span> <span class="s2">&quot;Missing vessel attributes&quot;</span>
-<span class="n">action_model</span><span class="o">.</span><span class="n">problem_description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">action_model</span><span class="o">.</span><span class="n">proposed_solution</span> <span class="o">=</span> <span class="s2">&quot;Fetch the missing attributes from API from the vessel entry page&quot;</span>
-<span class="n">action_model</span><span class="o">.</span><span class="n">action_priority</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">action_model</span><span class="o">.</span><span class="n">redirect_urls</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;Ship Modeling Fitter&quot;</span><span class="p">,</span> <span class="s2">&quot;/vw/ship_modelling_fitter/&quot;</span><span class="p">)</span> <span class="p">])</span>
-<span class="n">missing_attributes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">action_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">action_name</span> <span class="o">=</span> <span class="s2">&quot;missing_attributes&quot;</span>
+    <span class="n">action_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">copilot_actions</span><span class="p">()</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">ship</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ship</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">action_name</span> <span class="o">=</span> <span class="n">action_name</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">action_category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">problem_title</span> <span class="o">=</span> <span class="s2">&quot;Missing vessel attributes&quot;</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">problem_description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">proposed_solution</span> <span class="o">=</span> <span class="s2">&quot;Fetch the missing attributes from API from the vessel entry page&quot;</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">action_priority</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">redirect_urls</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;Ship Modeling Fitter&quot;</span><span class="p">,</span> <span class="s2">&quot;/vw/ship_modelling_fitter/&quot;</span><span class="p">)</span> <span class="p">])</span>
+    <span class="n">missing_attributes</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_null_attributes</span><span class="p">:</span>
-    <span class="k">print</span> <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
-    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">missing_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_null_attributes</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">missing_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">action_model</span><span class="o">.</span><span class="n">problem_description</span> <span class="o">=</span> <span class="s2">&quot;Missing attributes: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_attributes</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">action_model</span><span class="o">.</span><span class="n">problem_description</span> <span class="o">=</span> <span class="s2">&quot;Missing attributes: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_attributes</span><span class="p">))</span>
 
-<span class="n">action_model</span> <span class="o">=</span> <span class="n">action_template</span><span class="o">.</span><span class="n">get_action_basis_saved_action</span><span class="p">(</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span>
-    <span class="n">action_model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_actions</span><span class="p">,</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">response_wait_days</span>
-<span class="p">)</span>
+    <span class="n">action_model</span> <span class="o">=</span> <span class="n">action_template</span><span class="o">.</span><span class="n">get_action_basis_saved_action</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span>
+        <span class="n">action_model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_actions</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response_wait_days</span>
+    <span class="p">)</span>
 
-<span class="k">if</span> <span class="n">action_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="n">action_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">action_template</span><span class="o">.</span><span class="n">CopilotAction</span><span class="p">(</span><span class="n">action_model</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">if</span> <span class="n">action_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">action_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">action_template</span><span class="o">.</span><span class="n">CopilotAction</span><span class="p">(</span><span class="n">action_model</span><span class="p">)</span> <span class="p">)</span>
 
-<span class="k">return</span> <span class="n">action_list</span>
+    <span class="k">return</span> <span class="n">action_list</span>
 </pre></div>
 </div>
 <span class="target" id="module-vast.apps.vessel_copilot.copilot"></span><dl class="class">
@@ -259,6 +259,7 @@ in DB and is no longer needed.</p>
 <em class="property">class </em><code class="descclassname">vast.apps.vessel_copilot.copilot.</code><code class="descname">VesselCopilot</code><span class="sig-paren">(</span><em>ship</em>, <em>analyze_mode=True</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.copilot.VesselCopilot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vessel copilot class
 Instantiate this class to analyze a ship and get all the actions that need to be solved.</p>
+<p>Doc page:</p>
 <dl class="method">
 <dt id="vast.apps.vessel_copilot.copilot.VesselCopilot.analyze">
 <code class="descname">analyze</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.copilot.VesselCopilot.analyze" title="Permalink to this definition">¶</a></dt>
