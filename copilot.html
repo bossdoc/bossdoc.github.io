@@ -104,6 +104,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vessel Copilot</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#main-files">Main Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-a-new-action">Writing a new action</a></li>
 </ul>
 </li>
 </ul>
@@ -205,6 +206,53 @@ with an empty problem description. Then if the problem is present, we update the
 Finally we call <code class="docutils literal notranslate"><span class="pre">action_template.get_action_basis_saved_action</span></code> which handles whether to
 update and return the saved action, create a new action or return None if an action does not exist
 in DB and is no longer needed.</p>
+</div>
+</div>
+<div class="section" id="writing-a-new-action">
+<h2>Writing a new action<a class="headerlink" href="#writing-a-new-action" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Write a new <code class="docutils literal notranslate"><span class="pre">_analyze_xyz</span></code> function in the respective bot. Add the function in the list in the <code class="docutils literal notranslate"><span class="pre">analyze</span></code> function of the bot.</li>
+<li>Each function MUST always create actions of the required action_names (even if the problem does not exist).</li>
+<li>If the problem does not exist problem_description will be = “”. If it exists, problem description will be a non-empty sring.</li>
+<li>Finally, we call <code class="docutils literal notranslate"><span class="pre">action_template.get_action_basis_saved_action</span></code> to update the saved action. This function marks the status of the saved action.</li>
+<li>The status is marked as resolved if the problem does not exist, or it checks if email has been sent etc.</li>
+<li>Set <code class="docutils literal notranslate"><span class="pre">ignore_description=True</span></code> if you want to update the saved action regardless of whether the description of new and old action is the same or not.</li>
+</ul>
+<p>Example code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_analyze_missing_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="n">action_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">action_name</span> <span class="o">=</span> <span class="s2">&quot;missing_attributes&quot;</span>
+<span class="n">action_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">copilot_actions</span><span class="p">()</span>
+<span class="n">action_model</span><span class="o">.</span><span class="n">ship</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ship</span>
+<span class="n">action_model</span><span class="o">.</span><span class="n">action_name</span> <span class="o">=</span> <span class="n">action_name</span>
+<span class="n">action_model</span><span class="o">.</span><span class="n">action_category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span>
+<span class="n">action_model</span><span class="o">.</span><span class="n">problem_title</span> <span class="o">=</span> <span class="s2">&quot;Missing vessel attributes&quot;</span>
+<span class="n">action_model</span><span class="o">.</span><span class="n">problem_description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">action_model</span><span class="o">.</span><span class="n">proposed_solution</span> <span class="o">=</span> <span class="s2">&quot;Fetch the missing attributes from API from the vessel entry page&quot;</span>
+<span class="n">action_model</span><span class="o">.</span><span class="n">action_priority</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">action_model</span><span class="o">.</span><span class="n">redirect_urls</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;Ship Modeling Fitter&quot;</span><span class="p">,</span> <span class="s2">&quot;/vw/ship_modelling_fitter/&quot;</span><span class="p">)</span> <span class="p">])</span>
+<span class="n">missing_attributes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_null_attributes</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">missing_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">action_model</span><span class="o">.</span><span class="n">problem_description</span> <span class="o">=</span> <span class="s2">&quot;Missing attributes: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_attributes</span><span class="p">))</span>
+
+<span class="n">action_model</span> <span class="o">=</span> <span class="n">action_template</span><span class="o">.</span><span class="n">get_action_basis_saved_action</span><span class="p">(</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">ship</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span>
+    <span class="n">action_model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_actions</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">response_wait_days</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">action_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">action_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">action_template</span><span class="o">.</span><span class="n">CopilotAction</span><span class="p">(</span><span class="n">action_model</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="k">return</span> <span class="n">action_list</span>
+</pre></div>
 </div>
 <span class="target" id="module-vast.apps.vessel_copilot.copilot"></span><dl class="class">
 <dt id="vast.apps.vessel_copilot.copilot.VesselCopilot">

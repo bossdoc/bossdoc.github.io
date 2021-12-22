@@ -41,6 +41,55 @@ This can be used in certain analysis functions and is also displayed on the UI.
    update and return the saved action, create a new action or return None if an action does not exist 
    in DB and is no longer needed.
 
+Writing a new action
+--------------------
+
+* Write a new ``_analyze_xyz`` function in the respective bot. Add the function in the list in the ``analyze`` function of the bot. 
+* Each function MUST always create actions of the required action_names (even if the problem does not exist).
+* If the problem does not exist problem_description will be = "". If it exists, problem description will be a non-empty sring.
+* Finally, we call ``action_template.get_action_basis_saved_action`` to update the saved action. This function marks the status of the saved action.
+* The status is marked as resolved if the problem does not exist, or it checks if email has been sent etc. 
+* Set ``ignore_description=True`` if you want to update the saved action regardless of whether the description of new and old action is the same or not.
+
+Example code
+
+.. code-block:: python
+	
+	def _analyze_missing_attributes(self):
+        
+        action_list = []
+        action_name = "missing_attributes"
+        action_model = models.copilot_actions()
+        action_model.ship = self.ship
+        action_model.action_name = action_name
+        action_model.action_category = self.category
+        action_model.problem_title = "Missing vessel attributes"
+        action_model.problem_description = ""
+        action_model.proposed_solution = "Fetch the missing attributes from API from the vessel entry page"
+        action_model.action_priority = 1
+        action_model.redirect_urls = json.dumps([ ("Ship Modeling Fitter", "/vw/ship_modelling_fitter/") ])
+        missing_attributes = []
+        
+        for attr in self.non_null_attributes:
+            print (attr, getattr(self.ship, attr))
+            if getattr(self.ship, attr) is None:
+                missing_attributes.append(attr)
+
+        if len(missing_attributes) > 0:
+            action_model.problem_description = "Missing attributes: {}".format(", ".join(missing_attributes))
+
+        action_model = action_template.get_action_basis_saved_action(
+            self.ship, action_name, 
+            action_model, self.saved_actions, 
+            self.response_wait_days
+        )
+        
+        if action_model is not None:
+            action_list.append( action_template.CopilotAction(action_model) )
+
+        return action_list
+
+
 .. automodule:: vast.apps.vessel_copilot.copilot
 	:members:
 
