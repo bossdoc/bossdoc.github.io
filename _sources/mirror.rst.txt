@@ -50,6 +50,13 @@ Adding new Section like for e.g- Machinery Details
 - In views_receive_data.save_data_from_mail function search for line that says "get_meta_fields" , This function returns all the table column names as an array which we will be requiring later.
 - A bit below this line there is "prepare_dict_for_noon" where we are required to pass noon_data(the whole data which we have decoded already) , meta fields generated in above step, and d_type which is a parameter that can be utilized for some unique work we require to perform in this specific funtion.
 - Add the dictionary prepared in above step in dict_model_mapping, then add key in seq_mapper
+
+Hiding Control for Noon/Departure/Arrival Forms 
+--------------------------------------------------
+- We are using same form for Noon/Departure/Arrival. To hide the control we use the javascript function display_none
+- To hide td, give a class to that attribute td "display_attr" along with all the form names separeted by space   
+- For instance to show ETA in noon and departure report only(as it is not making sense to ask ETA on arrival report), class for ETA label td and input should be "display_attr noon departure"
+- "display_attr" will act as a trigger class, the display_none function run on all the elements with class "display_attr"
  
 
 

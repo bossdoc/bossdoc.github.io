@@ -1,0 +1,79 @@
+.. _email_service:
+
+Email Service
+==============================
+
+.. code-block:: python
+
+    IMAP_SERVER='imap.mail.yahoo.com'
+    IMAP_PORT=993
+    SMTP_SERVER='smtp.bizmail.yahoo.com'
+    SMTP_PORT=465
+
+    # Email Metadata dictionary
+    email_dictionary = {
+        'subject': '[C-ID: 12345] Email subject',
+        'e_date': datetime.datetime('2022-01-01'),
+        'sender': 'email@email.com',
+        'receiver': 'admin@shell.com',
+        'body': '/home/body/body_72.txt',
+        'attachments': ['/home/attachment/attachment_1.txt','/home/attachment/attachment_2.jpg'],
+        'email_uid': 72,
+        'category': 'Sent'
+    }
+
+
+Email Sender
+------------
+
+* SMTPLibHandler: ``vast/apps/vessel_copilot/email_sender.py``
+
+.. code-block:: python
+    
+        smtp = SMTPLibHandler(
+            username='email@email.com', 
+            password='$uper$ecret', 
+            )
+        smtp.send_email(subject='[C-ID: 1234-5678] Email subject as string', body='Respected sir...Regards', recipients=['admin@bw.com'] attachments=['/home/file1.pdf','/home/file2.jpg'], cc_list=['cc@cc.com'], bcc_list=[], message_uid='1234-568', first_email=True)
+        smtp.close_connection()
+        # Get email metadata if you want to save it in a database
+        email_metadata = smtp.get_last_email_metadata(subject='[C-ID: 1234-5678] Email subject as string', save_path=['/home/attachments_body/'])[-1]
+
+.. autoclass:: vast.apps.vessel_copilot.email_sender.SMTPLibHandler
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+    .. automethod:: __init__
+        
+        
+Email Reader
+------------
+
+* IMAPLibHandler: ``vast/apps/vessel_copilot/email_reader.py``
+
+.. code-block:: python
+        received_uid = 1 # UID from which you want to fetch emails - Last saved UID
+        send_uid = 2
+        imap = IMAPLibHandler(
+            username='email@email.com', 
+            password='$uper$ecret', 
+            attachment_path='/home/attachments/'
+            )
+        if imap.connection:
+            email_metadata = imap.read_email_chain(email_uid=received_uid+1,subject='C-ID',select_criteria='Inbox')
+            email_metadata += imap.read_email_chain(sender='email@email.com',subject='C-ID', email_uid=send_uid+1, select_criteria='Sent')
+            imap.close_connection()
+            return email_metadata
+
+.. autoclass:: vast.apps.vessel_copilot.email_sender.IMAPLibHandler
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+    .. automethod:: __init__
+
+
+
+
+

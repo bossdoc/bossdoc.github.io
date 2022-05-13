@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Email Service" href="email_service.html" />
     <link rel="prev" title="Route Planner" href="route_planner.html" /> 
 </head>
 
@@ -107,6 +108,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#writing-a-new-action">Writing a new action</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="email_service.html">Email Service</a></li>
 </ul>
 
             
@@ -255,8 +257,15 @@ in DB and is no longer needed.</p>
 </pre></div>
 </div>
 <span class="target" id="module-vast.apps.vessel_copilot.copilot"></span><dl class="class">
+<dt id="vast.apps.vessel_copilot.copilot.BotConfig">
+<em class="property">class </em><code class="descclassname">vast.apps.vessel_copilot.copilot.</code><code class="descname">BotConfig</code><a class="headerlink" href="#vast.apps.vessel_copilot.copilot.BotConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration for copilot and bots.</p>
+<p>Instantiate an object and change specific attibutes to change the behaviour of the copilot.</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="vast.apps.vessel_copilot.copilot.VesselCopilot">
-<em class="property">class </em><code class="descclassname">vast.apps.vessel_copilot.copilot.</code><code class="descname">VesselCopilot</code><span class="sig-paren">(</span><em>ship</em>, <em>analyze_mode=True</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.copilot.VesselCopilot" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">vast.apps.vessel_copilot.copilot.</code><code class="descname">VesselCopilot</code><span class="sig-paren">(</span><em>ship</em>, <em>bot_config=None</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.copilot.VesselCopilot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vessel copilot class
 Instantiate this class to analyze a ship and get all the actions that need to be solved.</p>
 <p>Doc page:</p>
@@ -285,11 +294,17 @@ Instantiate this class to analyze a ship and get all the actions that need to be
 
 <span class="target" id="module-vast.apps.vessel_copilot.action_template"></span><dl class="function">
 <dt id="vast.apps.vessel_copilot.action_template.get_action_basis_saved_action">
-<code class="descclassname">vast.apps.vessel_copilot.action_template.</code><code class="descname">get_action_basis_saved_action</code><span class="sig-paren">(</span><em>ship</em>, <em>action_name</em>, <em>new_action_model</em>, <em>saved_actions</em>, <em>response_wait_days</em>, <em>ignore_description=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.action_template.get_action_basis_saved_action" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.apps.vessel_copilot.action_template.</code><code class="descname">get_action_basis_saved_action</code><span class="sig-paren">(</span><em>ship</em>, <em>action_name</em>, <em>new_action_model</em>, <em>saved_actions</em>, <em>response_wait_days</em>, <em>ignore_description=True</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.action_template.get_action_basis_saved_action" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function looks at the saved action of the same action name and compares it with the new action model.
 If the problem no longer exists, it will change status of saved action to resolved (db is not updated though)
 If the problem still exists, it will check the status of the saved action.. Follow the code for the rest :P</p>
 <p>Returns an instance of models.copilot_actions or None</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vast.apps.vessel_copilot.action_template.get_cached_action">
+<code class="descclassname">vast.apps.vessel_copilot.action_template.</code><code class="descname">get_cached_action</code><span class="sig-paren">(</span><em>ship</em>, <em>action_name</em>, <em>saved_actions</em>, <em>cache_hours=2.0</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.action_template.get_cached_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the action is saved in the last time_delta_hours</p>
 </dd></dl>
 
 <span class="target" id="module-vast.apps.vessel_copilot.auto_solver"></span><dl class="function">
@@ -312,6 +327,8 @@ If the problem still exists, it will check the status of the saved action.. Foll
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="email_service.html" class="btn btn-neutral float-right" title="Email Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="route_planner.html" class="btn btn-neutral float-left" title="Route Planner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

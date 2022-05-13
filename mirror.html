@@ -98,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#read-mail-management-command">Read Mail management Command</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#passing-encoded-data-manually-in-mirror-backend-system">Passing Encoded Data Manually in Mirror Backend System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-new-section-like-for-e-g-machinery-details">Adding new Section like for e.g- Machinery Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hiding-control-for-noon-departure-arrival-forms">Hiding Control for Noon/Departure/Arrival Forms</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="post_voyage.html">Post Voyage</a></li>
@@ -114,6 +115,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Vessel Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email_service.html">Email Service</a></li>
 </ul>
 
             
@@ -229,6 +231,15 @@
 <li>In views_receive_data.save_data_from_mail function search for line that says “get_meta_fields” , This function returns all the table column names as an array which we will be requiring later.</li>
 <li>A bit below this line there is “prepare_dict_for_noon” where we are required to pass noon_data(the whole data which we have decoded already) , meta fields generated in above step, and d_type which is a parameter that can be utilized for some unique work we require to perform in this specific funtion.</li>
 <li>Add the dictionary prepared in above step in dict_model_mapping, then add key in seq_mapper</li>
+</ul>
+</div>
+<div class="section" id="hiding-control-for-noon-departure-arrival-forms">
+<h2>Hiding Control for Noon/Departure/Arrival Forms<a class="headerlink" href="#hiding-control-for-noon-departure-arrival-forms" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>We are using same form for Noon/Departure/Arrival. To hide the control we use the javascript function display_none</li>
+<li>To hide td, give a class to that attribute td “display_attr” along with all the form names separeted by space</li>
+<li>For instance to show ETA in noon and departure report only(as it is not making sense to ask ETA on arrival report), class for ETA label td and input should be “display_attr noon departure”</li>
+<li>“display_attr” will act as a trigger class, the display_none function run on all the elements with class “display_attr”</li>
 </ul>
 </div>
 </div>

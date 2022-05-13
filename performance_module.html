@@ -106,6 +106,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Vessel Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email_service.html">Email Service</a></li>
 </ul>
 
             
@@ -236,7 +237,7 @@ speed_key, speed_key used for filtering speed range.</p>
 
 <dl class="function">
 <dt id="vast.views_boss_capt.perf_data_analysis.find_model_accuracy">
-<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">find_model_accuracy</code><span class="sig-paren">(</span><em>noon_list</em>, <em>fitted_models</em>, <em>speed_key='perf_speed'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.find_model_accuracy" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">find_model_accuracy</code><span class="sig-paren">(</span><em>noon_list</em>, <em>fitted_models</em>, <em>speed_key='perf_speed'</em>, <em>min_data_pts=8</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.find_model_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>fitted_models data structure is the same as what is returned by convert_ship_model_to_fitted_model.</p>
 </dd></dl>
 
@@ -292,7 +293,7 @@ aggregates the results.</p>
 
 <dl class="function">
 <dt id="vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed">
-<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models_windowed</code><span class="sig-paren">(</span><em>ship_wise_data, windowing_type, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', single_order_fitting=False, fit_intercept=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">fit_vessel_performance_models_windowed</code><span class="sig-paren">(</span><em>ship_wise_data, windowing_type, models=['rpm_speed', 'rpm_foc', 'speed_foc'], speed_key='stw', fuel_type='foc', single_order_fitting=False, fit_intercept=False, normalize_by_disp=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.fit_vessel_performance_models_windowed" title="Permalink to this definition">¶</a></dt>
 <dd><p>For performance trending. Similar return structure as fit_vessel_performance_models,
 but also has information about windows.</p>
 </dd></dl>
@@ -334,7 +335,7 @@ does not do gradewise computation.</p>
 
 <dl class="function">
 <dt id="vast.views_boss_capt.perf_data_analysis.get_noon_data_ship_wise">
-<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_noon_data_ship_wise</code><span class="sig-paren">(</span><em>ship_list</em>, <em>filter_params</em>, <em>date_from</em>, <em>date_to</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_noon_data_ship_wise" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_boss_capt.perf_data_analysis.</code><code class="descname">get_noon_data_ship_wise</code><span class="sig-paren">(</span><em>ship_list</em>, <em>filter_params</em>, <em>date_from</em>, <em>date_to</em>, <em>hull_cleaning_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_boss_capt.perf_data_analysis.get_noon_data_ship_wise" title="Permalink to this definition">¶</a></dt>
 <dd><p>ALWAYS use this function to get noon data for ships.
 ship_list : list of instances of models.Ship
 only relevant filter_params

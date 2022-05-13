@@ -30,6 +30,7 @@ Welcome to boss's documentation!
    performance_module
    route_planner
    copilot
+   email_service
 
 Indices and tables
 ==================

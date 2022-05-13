@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Email Service &mdash; BOSS  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Vessel Copilot" href="copilot.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> BOSS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ui_standard.html">UI Standard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_docs.html">Writing Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytest.html">PyTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulator.html">Voyage Simulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror.html">Mirror Offline HTML Form</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror.html#mirror-backend">Mirror Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_voyage.html">Post Voyage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="captn.html">Capt-N</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iva.html">IVA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo_helper.html">Geo Helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spire_position.html">Spire Position</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather_viz_v2.html">Weather Viz V2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ship_modelling.html">Ship Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="digital_ocean.html">Digital Ocean Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging_configuration.html">Logging Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot.html">Vessel Copilot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Email Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#email-sender">Email Sender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#email-reader">Email Reader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BOSS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Email Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/email_service.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="email-service">
+<span id="id1"></span><h1>Email Service<a class="headerlink" href="#email-service" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">IMAP_SERVER</span><span class="o">=</span><span class="s1">&#39;imap.mail.yahoo.com&#39;</span>
+<span class="n">IMAP_PORT</span><span class="o">=</span><span class="mi">993</span>
+<span class="n">SMTP_SERVER</span><span class="o">=</span><span class="s1">&#39;smtp.bizmail.yahoo.com&#39;</span>
+<span class="n">SMTP_PORT</span><span class="o">=</span><span class="mi">465</span>
+
+<span class="c1"># Email Metadata dictionary</span>
+<span class="n">email_dictionary</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="s1">&#39;[C-ID: 12345] Email subject&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;e_date&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="s1">&#39;2022-01-01&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="s1">&#39;email@email.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;receiver&#39;</span><span class="p">:</span> <span class="s1">&#39;admin@shell.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="s1">&#39;/home/body/body_72.txt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;attachments&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;/home/attachment/attachment_1.txt&#39;</span><span class="p">,</span><span class="s1">&#39;/home/attachment/attachment_2.jpg&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;email_uid&#39;</span><span class="p">:</span> <span class="mi">72</span><span class="p">,</span>
+    <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Sent&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="email-sender">
+<h2>Email Sender<a class="headerlink" href="#email-sender" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>SMTPLibHandler: <code class="docutils literal notranslate"><span class="pre">vast/apps/vessel_copilot/email_sender.py</span></code></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smtp</span> <span class="o">=</span> <span class="n">SMTPLibHandler</span><span class="p">(</span>
+    <span class="n">username</span><span class="o">=</span><span class="s1">&#39;email@email.com&#39;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s1">&#39;$uper$ecret&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">smtp</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="s1">&#39;[C-ID: 1234-5678] Email subject as string&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s1">&#39;Respected sir...Regards&#39;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;admin@bw.com&#39;</span><span class="p">]</span> <span class="n">attachments</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/home/file1.pdf&#39;</span><span class="p">,</span><span class="s1">&#39;/home/file2.jpg&#39;</span><span class="p">],</span> <span class="n">cc_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cc@cc.com&#39;</span><span class="p">],</span> <span class="n">bcc_list</span><span class="o">=</span><span class="p">[],</span> <span class="n">message_uid</span><span class="o">=</span><span class="s1">&#39;1234-568&#39;</span><span class="p">,</span> <span class="n">first_email</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">smtp</span><span class="o">.</span><span class="n">close_connection</span><span class="p">()</span>
+<span class="c1"># Get email metadata if you want to save it in a database</span>
+<span class="n">email_metadata</span> <span class="o">=</span> <span class="n">smtp</span><span class="o">.</span><span class="n">get_last_email_metadata</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="s1">&#39;[C-ID: 1234-5678] Email subject as string&#39;</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/home/attachments_body/&#39;</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler">
+<em class="property">class </em><code class="descclassname">vast.apps.vessel_copilot.email_sender.</code><code class="descname">SMTPLibHandler</code><span class="sig-paren">(</span><em>username</em>, <em>password</em>, <em>port=None</em>, <em>smtp_server=None</em>, <em>parse_image=True</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>username</em>, <em>password</em>, <em>port=None</em>, <em>smtp_server=None</em>, <em>parse_image=True</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize SMTP Handler</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>username</strong> (<em>str</em>) – Email id through which you want to send email and login</li>
+<li><strong>password</strong> (<em>str</em>) – Password</li>
+<li><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – SMTP_PORT, defaults to 465 from settings.py</li>
+<li><strong>smtp_server</strong> (<em>str</em><em>, </em><em>optional</em>) – SMTP server, defaults to ‘smtp.bizmail.yahoo.com’</li>
+<li><strong>parse_image</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether you want to parse images available inside body either as base64 or img tag , defaults to True</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.add_attachments">
+<code class="descname">add_attachments</code><span class="sig-paren">(</span><em>message</em>, <em>attachments</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.add_attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add attachments to the email - Will be called implicitly from create_email_content()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.close_connection">
+<code class="descname">close_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.close_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the connection</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.create_email_content">
+<code class="descname">create_email_content</code><span class="sig-paren">(</span><em>subject</em>, <em>recipients</em>, <em>body</em>, <em>attachments=[]</em>, <em>cc_list=None</em>, <em>bcc_list=None</em>, <em>message_uid=None</em>, <em>first_email=True</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.create_email_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create email content as string - Will be called implicitly from send_email()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.get_image_extension_from_base64">
+<code class="descname">get_image_extension_from_base64</code><span class="sig-paren">(</span><em>image_data</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.get_image_extension_from_base64" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get image extension from base64 data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.get_last_email_metadata">
+<code class="descname">get_last_email_metadata</code><span class="sig-paren">(</span><em>subject</em>, <em>save_path</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.get_last_email_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get metadata of the last sent email using IMAPLibHandler
+We need this data to save the email in the database as single point of truth</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>subject</strong> (<em>str</em>) – subject of email to fetch email metadata using that</li>
+<li><strong>save_path</strong> (<em>str</em>) – Attachment save path</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Returns dictionary containing email metadata. Refer to vast.apps.vessel_copilot.email_reader.IMAPLibHandler</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.join_emails">
+<code class="descname">join_emails</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.join_emails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join emails in comma-separated format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – List of emails</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Comma separated string of emails</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.login">
+<code class="descname">login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login to the SMTP server - Called from the constructor itself</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.parse_body_images">
+<code class="descname">parse_body_images</code><span class="sig-paren">(</span><em>body</em>, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.parse_body_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse body and add images to the email.  Will be called implicitly from create_email_content()
+This will save the attached images - be in base64 or attached as img tag as an email attachment.
+It will also render those images as email content using the attachment uid which will be set as the image_name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.SMTPLibHandler.send_email">
+<code class="descname">send_email</code><span class="sig-paren">(</span><em>subject</em>, <em>body</em>, <em>recipients</em>, <em>attachments=[]</em>, <em>cc_list=None</em>, <em>bcc_list=None</em>, <em>message_uid=None</em>, <em>first_email=True</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.SMTPLibHandler.send_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send an email using SMTP
+receiver_list: Takes string as well as list of string
+cc_list: Takes string as well as list of string
+attachments:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>subject</strong> (<em>str</em>) – Email Subject</li>
+<li><strong>body</strong> (<em>str</em>) – Body</li>
+<li><strong>recipients</strong> (<em>str</em><em> or </em><em>list</em><em>(</em><em>str</em><em>)</em>) – Email recipient (BCC and CC should be handled separately)</li>
+<li><strong>attachments</strong> (<em>list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>optional</em>) – Takes list of file path for attachments, defaults to []</li>
+<li><strong>cc_list</strong> (<em>str</em><em> or </em><em>list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>optional</em>) – CC Email list, defaults to None</li>
+<li><strong>bcc_list</strong> (<em>str</em><em> or </em><em>list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>optional</em>) – BCC Email list, defaults to None</li>
+<li><strong>message_uid</strong> (<em>str</em><em>, </em><em>optional</em>) – Copilot Case-id (Any unique id to be used as email chain primary key), defaults to None</li>
+<li><strong>first_email</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use this along with message_uid to distinguish b/w new chain or old chain - True implies this is the first email in this chain, defaults to True</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="email-reader">
+<h2>Email Reader<a class="headerlink" href="#email-reader" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>IMAPLibHandler: <code class="docutils literal notranslate"><span class="pre">vast/apps/vessel_copilot/email_reader.py</span></code></li>
+</ul>
+<dl class="class">
+<dt id="vast.apps.vessel_copilot.email_sender.IMAPLibHandler">
+<em class="property">class </em><code class="descclassname">vast.apps.vessel_copilot.email_sender.</code><code class="descname">IMAPLibHandler</code><span class="sig-paren">(</span><em>username</em>, <em>password</em>, <em>attachment_path</em>, <em>imap_server='imap.bizmail.yahoo.com'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.IMAPLibHandler" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.IMAPLibHandler.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>username</em>, <em>password</em>, <em>attachment_path</em>, <em>imap_server='imap.bizmail.yahoo.com'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.IMAPLibHandler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize IMAP Handler</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>username</strong> (<em>str</em>) – Email id through which you want to fetch emails and login</li>
+<li><strong>password</strong> (<em>str</em>) – Password</li>
+<li><strong>attachment_path</strong> (<em>str</em>) – Path where you want to save email attachments fetched</li>
+<li><strong>imap_server</strong> (<em>str</em><em>, </em><em>optional</em>) – IMAP_SERVER which is ‘imap.mail.yahoo.com’, defaults to settings.IMAP_SERVER</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.IMAPLibHandler.close_connection">
+<code class="descname">close_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.IMAPLibHandler.close_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the connection to the IMAP server</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.IMAPLibHandler.create_hash">
+<code class="descname">create_hash</code><span class="sig-paren">(</span><em>string</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.IMAPLibHandler.create_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a hash using attachment name to save as content-id to save the attachment inside body</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.IMAPLibHandler.get_email_content">
+<code class="descname">get_email_content</code><span class="sig-paren">(</span><em>email_uid</em>, <em>select_criteria</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.IMAPLibHandler.get_email_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the email using email_uid and return email_metadata dictionary - Called by read_email_chain</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.IMAPLibHandler.login">
+<code class="descname">login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.IMAPLibHandler.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login to the IMAP server with imap_server being the host - Called implicitly by the constructor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.IMAPLibHandler.read_email_chain">
+<code class="descname">read_email_chain</code><span class="sig-paren">(</span><em>sender=None</em>, <em>email_uid=None</em>, <em>receiver=None</em>, <em>subject=None</em>, <em>historic_days=10</em>, <em>read_last_email=False</em>, <em>select_criteria='Inbox'</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.IMAPLibHandler.read_email_chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read email chains methode for IMAP server
+Takes multiple filters for fetching emails</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sender</strong> (<em>str</em><em>, </em><em>optional</em>) – Email Sender- In case you want to fetch from ‘Sent’, defaults to None</li>
+<li><strong>email_uid</strong> (<em>int</em><em>, </em><em>optional</em>) – Email uid from where you want to fetch emails - INCLUSIVE, defaults to None</li>
+<li><strong>receiver</strong> (<em>str</em><em>, </em><em>optional</em>) – In case you want to fetch on the basis of who received the email(To), defaults to None</li>
+<li><strong>subject</strong> (<em>str</em><em>, </em><em>optional</em>) – Subject for filtering, defaults to None</li>
+<li><strong>historic_days</strong> (<em>int</em><em>, </em><em>optional</em>) – Cap on days to be fetched, defaults to 10</li>
+<li><strong>read_last_email</strong> (<em>bool</em><em>, </em><em>optional</em>) – If you want to fail only the last sent email works well in Copilot Email Saving Mechanism, defaults to False</li>
+<li><strong>select_criteria</strong> (<em>str</em><em>, </em><em>optional</em>) – Email Folder - Sent, Inbox, defaults to ‘Inbox’</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of email metadata dictionary</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list(dict)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vast.apps.vessel_copilot.email_sender.IMAPLibHandler.save_attachment">
+<code class="descname">save_attachment</code><span class="sig-paren">(</span><em>path</em>, <em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.apps.vessel_copilot.email_sender.IMAPLibHandler.save_attachment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the attachment to the specified folder path according to the filename</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="copilot.html" class="btn btn-neutral float-left" title="Vessel Copilot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Blue Water Trade Winds pvt ltd
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -107,6 +107,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Vessel Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email_service.html">Email Service</a></li>
 </ul>
 
             
@@ -212,12 +213,13 @@ route_data: Route data consist of Latitudes and longitudes between selected port
 <code class="descclassname">vast.views_weather_vizv2.routePlanner.</code><code class="descname">rp_get_recommended_route</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_vizv2.routePlanner.rp_get_recommended_route" title="Permalink to this definition">¶</a></dt>
 <dd><p>voyage_id: Voyage Id</p>
 <p>pos_date: Date and Time</p>
+<p>curr_pos : Current position of the ship</p>
 <p>returns recommended route for voyage corresponding to given date and time.</p>
 </dd></dl>
 
 <dl class="last function">
 <dt id="vast.views_weather_vizv2.routePlanner.simulate_route_plans">
-<code class="descclassname">vast.views_weather_vizv2.routePlanner.</code><code class="descname">simulate_route_plans</code><span class="sig-paren">(</span><em>model_constants</em>, <em>route_data</em>, <em>start_date</em>, <em>load_disp=None</em>, <em>ship=None</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_vizv2.routePlanner.simulate_route_plans" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">vast.views_weather_vizv2.routePlanner.</code><code class="descname">simulate_route_plans</code><span class="sig-paren">(</span><em>model_constants</em>, <em>route_data</em>, <em>start_date</em>, <em>load_disp=None</em>, <em>ship=None</em>, <em>weather_source='Spire'</em>, <em>get_detailed_schedule=False</em><span class="sig-paren">)</span><a class="headerlink" href="#vast.views_weather_vizv2.routePlanner.simulate_route_plans" title="Permalink to this definition">¶</a></dt>
 <dd><p>modal_constants: Selected hydrodynamic model constants.</p>
 <p>route_data: Route data consist of Latitudes and longitudes between selected ports or vessels.</p>
 <p>start_date: Departure date of Ship.</p>

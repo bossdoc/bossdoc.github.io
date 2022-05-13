@@ -100,8 +100,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#apache-configuration">Apache Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cron-jobs">Cron Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ufw-configuration-firewall">UFW Configuration (Firewall)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nfs-share-volumes">NFS (Share Volumes)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#apache-log-rotate">Apache Log rotate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sql-bin-log-size">SQL Bin log size</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sql_configuration.html">SQL Configuration</a></li>
@@ -110,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="performance_module.html">Performance Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="route_planner.html">Route Planner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Vessel Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email_service.html">Email Service</a></li>
 </ul>
 
             
@@ -177,11 +180,13 @@
   <div class="section" id="digital-ocean-configuration">
 <span id="digital-ocean"></span><h1>Digital Ocean Configuration<a class="headerlink" href="#digital-ocean-configuration" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>Installation Script: <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/boss_script_ubuntu16.sh</span></code></li>
+<li>Installation Script: <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/boss_script_ubuntu20.sh</span></code></li>
 <li>Apache config: <code class="docutils literal notranslate"><span class="pre">vw/digital_ocean/bossv2-apache.conf</span></code></li>
 <li>Matplotlib <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip</a></li>
 <li>Basemap <a class="reference external" href="https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip">https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip</a></li>
 <li>Eccodes <a class="reference external" href="https://confluence.ecmwf.int/download/attachments/45757960/eccodes-2.22.1-Source.tar.gz?api=v2">https://confluence.ecmwf.int/download/attachments/45757960/eccodes-2.22.1-Source.tar.gz?api=v2</a></li>
+<li>Get requirements-pre.txt and requirements.txt from <code class="docutils literal notranslate"><span class="pre">vast/digital_ocean/</span></code></li>
+<li></li>
 </ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -208,10 +213,6 @@
 <li>Enable bossv2 apache
 Note: You will have to update the path inside the apache conf according to your system</li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo a2ensite bossv2-apache.conf
-    sudo ufw allow <span class="m">800</span>
-</pre></div>
-</div>
 <ul class="simple">
 <li>Restart apache service</li>
 </ul>
@@ -219,7 +220,14 @@ Note: You will have to update the path inside the apache conf according to your 
 sudo service apache2 restart
 </pre></div>
 </div>
-<p>Note: Give Permissions to your directories according to your directory tree structure. It should look something like this.</p>
+<ul class="simple">
+<li>Enable SSL HTTPS</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install certbot python3-certbot-apache
+certbot --apache
+</pre></div>
+</div>
+<p>Note: Enable Rewrite to https in certbot when asked. Give Permissions to your directories according to your directory tree structure. It should look something like this.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
 ├── bossv2
 │   ├── Data
@@ -262,12 +270,48 @@ sudo service apache2 restart
 </ul>
 <p>Note: Delete cron config using <code class="docutils literal notranslate"><span class="pre">crontab</span> <span class="pre">-r</span></code></p>
 </div>
+<div class="section" id="ufw-configuration-firewall">
+<h2>UFW Configuration (Firewall)<a class="headerlink" href="#ufw-configuration-firewall" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ufw allow ssh
+ufw allow OpenSSH
+ufw allow http
+ufw allow https
+ufw allow ‘Apache Full’
+<span class="c1"># Add other ports like 3306 as per your requirement</span>
+ufw <span class="nb">enable</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>bossv2 Configuration</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>To                         Action      From
+--                         ------      ----
+<span class="m">2049</span>                       ALLOW       <span class="m">10</span>.106.0.2
+<span class="m">22</span>/tcp                     ALLOW       Anywhere
+Apache Secure              ALLOW       Anywhere
+<span class="m">80</span>/tcp                     ALLOW       Anywhere
+<span class="m">443</span>/tcp                    ALLOW       Anywhere
+OpenSSH                    ALLOW       Anywhere
+<span class="m">3306</span>                       ALLOW       <span class="m">10</span>.106.0.2
+Apache Full                ALLOW       Anywhere
+<span class="m">3306</span>                       ALLOW       Anywhere
+<span class="m">2049</span>                       ALLOW       <span class="m">10</span>.106.0.4
+<span class="m">22</span>/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>
+Apache Secure <span class="o">(</span>v6<span class="o">)</span>         ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>
+<span class="m">80</span>/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>
+<span class="m">443</span>/tcp <span class="o">(</span>v6<span class="o">)</span>               ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>
+OpenSSH <span class="o">(</span>v6<span class="o">)</span>               ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>
+Apache Full <span class="o">(</span>v6<span class="o">)</span>           ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>
+<span class="m">3306</span> <span class="o">(</span>v6<span class="o">)</span>                  ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="nfs-share-volumes">
 <h2>NFS (Share Volumes)<a class="headerlink" href="#nfs-share-volumes" title="Permalink to this headline">¶</a></h2>
 <p>Host IP Address: 10.100.1.host
 CLient IP Address: 10.100.2.client</p>
 <ul class="simple">
-<li>Host</li>
+<li>Host (bossv2)</li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install nfs-kernel-server
 </pre></div>
@@ -283,7 +327,7 @@ systemctl restart nfs-kernel-server
 </pre></div>
 </div>
 <ul class="simple">
-<li>Client</li>
+<li>Client (aboss)</li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install nfs-common
 mkdir -p /home/bossbwtw
@@ -323,6 +367,19 @@ nano /etc/fstab
                 <span class="k">fi</span><span class="p">;</span> <span class="se">\</span>
         endscript
 <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sql-bin-log-size">
+<h2>SQL Bin log size<a class="headerlink" href="#sql-bin-log-size" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Append to ‘/etc/mysql/mysql.cnf’ and ‘/etc/mysql/my.cnf’:</li>
+</ul>
+<p>You can omit parameters other than binlog_expire_logs_seconds</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">max_binlog_size</span>         <span class="o">=</span> 2G
+<span class="nv">query_cache_type</span>        <span class="o">=</span> 1G
+<span class="nv">query_cache_size</span>        <span class="o">=</span> 2G
+<span class="nv">binlog_expire_logs_seconds</span><span class="o">=</span><span class="m">10800</span>
 </pre></div>
 </div>
 </div>

@@ -3,12 +3,13 @@
 Digital Ocean Configuration
 ==============================
 
-* Installation Script: ``vast/digital_ocean/boss_script_ubuntu16.sh``
+* Installation Script: ``vast/digital_ocean/boss_script_ubuntu20.sh``
 * Apache config: ``vw/digital_ocean/bossv2-apache.conf``
 * Matplotlib https://bossbwtw.s3.us-east-2.amazonaws.com/matplotlib-1.4.3.zip
 * Basemap https://bossbwtw.s3.us-east-2.amazonaws.com/v1.1.0.zip
 * Eccodes https://confluence.ecmwf.int/download/attachments/45757960/eccodes-2.22.1-Source.tar.gz?api=v2
-
+* Get requirements-pre.txt and requirements.txt from ``vast/digital_ocean/``
+* 
 Installation
 ------------
 
@@ -44,9 +45,9 @@ Apache Configuration
   Note: You will have to update the path inside the apache conf according to your system
   
 .. code-block:: bash
-
+	sudo sudo a2enmod rewrite && sudo service apache2 restart
     sudo a2ensite bossv2-apache.conf
-	sudo ufw allow 800
+	
     
 * Restart apache service
     
@@ -55,7 +56,13 @@ Apache Configuration
 	sudo systemctl reload apache2
 	sudo service apache2 restart
 
-Note: Give Permissions to your directories according to your directory tree structure. It should look something like this.
+* Enable SSL HTTPS
+.. code-block:: bash
+  
+	sudo apt install certbot python3-certbot-apache
+	certbot --apache
+
+Note: Enable Rewrite to https in certbot when asked. Give Permissions to your directories according to your directory tree structure. It should look something like this.
 
 
 .. code-block:: bash
@@ -103,12 +110,49 @@ Use ``vast/digital_ocean/Cron``. Change paths, username, database, password acco
 Note: Delete cron config using ``crontab -r``
 
 
+UFW Configuration (Firewall)
+-------------------
+
+.. code-block:: bash
+
+	ufw allow ssh
+	ufw allow OpenSSH
+	ufw allow http
+	ufw allow https
+	ufw allow ‘Apache Full’
+	# Add other ports like 3306 as per your requirement
+	ufw enable
+
+* bossv2 Configuration
+  
+.. code-block:: bash
+
+	To                         Action      From
+	--                         ------      ----
+	2049                       ALLOW       10.106.0.2                
+	22/tcp                     ALLOW       Anywhere                  
+	Apache Secure              ALLOW       Anywhere                  
+	80/tcp                     ALLOW       Anywhere                  
+	443/tcp                    ALLOW       Anywhere                  
+	OpenSSH                    ALLOW       Anywhere                  
+	3306                       ALLOW       10.106.0.2                
+	Apache Full                ALLOW       Anywhere                  
+	3306                       ALLOW       Anywhere                  
+	2049                       ALLOW       10.106.0.4                
+	22/tcp (v6)                ALLOW       Anywhere (v6)             
+	Apache Secure (v6)         ALLOW       Anywhere (v6)             
+	80/tcp (v6)                ALLOW       Anywhere (v6)             
+	443/tcp (v6)               ALLOW       Anywhere (v6)             
+	OpenSSH (v6)               ALLOW       Anywhere (v6)             
+	Apache Full (v6)           ALLOW       Anywhere (v6)             
+	3306 (v6)                  ALLOW       Anywhere (v6)  
+
 NFS (Share Volumes)
 -------------------
 Host IP Address: 10.100.1.host
 CLient IP Address: 10.100.2.client
 
-* Host
+* Host (bossv2)
 
 .. code-block:: bash
 
@@ -128,7 +172,7 @@ Add this in '/etc/exports':
 	ufw allow from 10.100.2.client to any port nfs
 	systemctl restart nfs-kernel-server
 
-* Client
+* Client (aboss)
 
 .. code-block:: bash
 
@@ -174,3 +218,14 @@ Apache Log rotate
 	}
 
 
+SQL Bin log size 
+-----------------
+* Append to '/etc/mysql/mysql.cnf' and '/etc/mysql/my.cnf':
+You can omit parameters other than binlog_expire_logs_seconds
+
+.. code-block:: bash
+
+	max_binlog_size         = 2G
+	query_cache_type        = 1G
+	query_cache_size        = 2G
+	binlog_expire_logs_seconds=10800
